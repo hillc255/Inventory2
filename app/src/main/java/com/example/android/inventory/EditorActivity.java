@@ -35,7 +35,7 @@ import com.example.android.inventory.data.InventoryContract.InventoryEntry;
 public class EditorActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
-    public Button button;
+   // public Button button;
 
     /**
      * Identifier for the pet data loader
@@ -86,6 +86,8 @@ public class EditorActivity extends AppCompatActivity implements
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             mInventoryHasChanged = true;
+
+            Log.v("OnTouchListener","click on view to edit");
             return false;
         }
     };
@@ -100,6 +102,8 @@ public class EditorActivity extends AppCompatActivity implements
         Intent intent = getIntent();
         mCurrentInventoryUri = intent.getData();
 
+        Log.v("OnCreate EditorActivity","activity_editor");
+
         // If the intent DOES NOT contain a pet content URI, then we know that we are
         // creating a new pet.
         if (mCurrentInventoryUri == null) {
@@ -112,6 +116,8 @@ public class EditorActivity extends AppCompatActivity implements
         } else {
             // Otherwise this is an existing pet, so change app bar to say "Edit Pet"
             setTitle(getString(R.string.editor_activity_title_edit_product));
+
+            Log.v("edit intent","edit pet - get ready for loader");
 
             // Initialize a loader to read the pet data from the database
             // and display the current values in the editor
@@ -138,13 +144,13 @@ public class EditorActivity extends AppCompatActivity implements
 
         //     setupSpinner();
 
-        Button button2 = (Button) findViewById(R.id.quantitybutton);
-        button2.setOnClickListener(new View.OnClickListener(){
-            //@Override
-            public void onClick(View v){
-                // Do something in response to button click
-            }
-        });
+//        Button button2 = (Button) findViewById(R.id.quantitybutton);
+//        button2.setOnClickListener(new View.OnClickListener(){
+//            //@Override
+//            public void onClick(View v){
+//                // Do something in response to button click
+//            }
+//        });
     }
 //
     /**

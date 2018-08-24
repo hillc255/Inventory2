@@ -40,23 +40,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="#AEB6BD"
-        android:paddingRight="40dp"/>
-
-        <Button
-            android:id="@+id/quantitybutton"
+        <TextView
+            android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="Sale - Reduce Quantity"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#000000" />
+            android:textColor="#AEB6BD"
+            android:paddingRight="40dp"/>
+
 
     </LinearLayout>
 

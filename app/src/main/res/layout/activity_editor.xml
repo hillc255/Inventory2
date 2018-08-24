@@ -61,11 +61,7 @@
                 style="@style/EditorFieldStyle" />
 
             <!-- Quantity button field -->
-            <Button
-                android:id="@+id/button_id2"
-                android:hint="Reduce Quantity"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
+
 
         </LinearLayout>
     </LinearLayout>
@@ -83,12 +79,12 @@
             style="@style/CategoryStyle" />
 
         <!-- Input fields -->
-        <LinearLayout
+        <RelativeLayout
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:layout_weight="2"
-            android:paddingLeft="4dp"
-            android:orientation="vertical">
+            android:paddingLeft="4dp">
+
 
             <EditText
                 android:id="@+id/edit_suppliername"
@@ -101,8 +97,9 @@
                 android:id="@+id/edit_supplierphone"
                 android:hint="Supplier Phone"
                 android:inputType="textCapWords"
+                android:layout_below="@id/edit_suppliername"
                 style="@style/EditorFieldStyle" />
 
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
 </LinearLayout>

@@ -68,8 +68,8 @@
     <!-- Label for gender information in the editor [CHAR LIMIT=30] -->
     <!--<string name="category_gender">Gender</string>-->
 
-    <!-- Label for measurement information in the editor [CHAR LIMIT=30] -->
-    <!--<string name="category_measurement">Measurement</string>-->
+     <!--Label for measurement information in the editor [CHAR LIMIT=30] -->
+    <string name="category_measurement">Measurement</string>
 
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
     <string name="hint_pet_name">Name</string>

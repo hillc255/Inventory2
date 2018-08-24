@@ -58,6 +58,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         // Find individual views that we want to modify in the list item layout
         TextView nameTextView = (TextView) view.findViewById(R.id.name);
+       // TextView summaryTextView = (TextView) view.findViewById(R.id.summary)
         TextView priceTextView = (TextView) view.findViewById(R.id.price);
         TextView quantityTextView = (TextView) view.findViewById(R.id.quantity);
 

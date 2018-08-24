@@ -198,7 +198,7 @@ public class InventoryProvider extends ContentProvider {
         if (values.containsKey(InventoryEntry.COLUMN_PRODUCT_NAME)) {
             String name = values.getAsString(InventoryEntry.COLUMN_PRODUCT_NAME);
             if (name == null) {
-                throw new IllegalArgumentException("Pet requires a name");
+                throw new IllegalArgumentException("Inventory requires a name");
             }
         }
 
