@@ -87,7 +87,7 @@ public class EditorActivity extends AppCompatActivity implements
         public boolean onTouch(View view, MotionEvent motionEvent) {
             mInventoryHasChanged = true;
 
-            Log.v("OnTouchListener","click on view to edit");
+            Log.v("OnTouchListener","click on view to edit**************");
             return false;
         }
     };
@@ -102,7 +102,7 @@ public class EditorActivity extends AppCompatActivity implements
         Intent intent = getIntent();
         mCurrentInventoryUri = intent.getData();
 
-        Log.v("OnCreate EditorActivity","activity_editor");
+        Log.v("OnCreate EditorActivity","activity_editor*****");
 
         // If the intent DOES NOT contain a pet content URI, then we know that we are
         // creating a new pet.
@@ -130,6 +130,7 @@ public class EditorActivity extends AppCompatActivity implements
         mQuantityEditText = (EditText) findViewById(R.id.edit_quantity);
         mSuppliernameEditText = (EditText) findViewById(R.id.edit_suppliername);
         mSupplierphoneEditText = (EditText) findViewById(R.id.edit_supplierphone);
+
         //  mGenderSpinner = (Spinner) findViewById(R.id.spinner_gender);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user

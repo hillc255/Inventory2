@@ -50,6 +50,16 @@
             android:paddingRight="40dp"/>
 
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Sale - Reduce Quantity"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="#000000" />
+
+
     </LinearLayout>
 
 </LinearLayout>
