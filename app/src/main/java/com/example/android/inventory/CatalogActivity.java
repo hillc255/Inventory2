@@ -23,7 +23,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.android.inventory.data.InventoryContract;
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
 import com.example.android.inventory.data.InventoryDbHelper;
 
@@ -34,8 +36,15 @@ public class CatalogActivity extends AppCompatActivity implements
     /** Identifier for the pet data loader */
     private static final int INVENTORY_LOADER = 0;
 
+
+    public interface BtnClickListener { public abstract void onBtnClick(int position);
+    }
+
     /** Adapter for the ListView */
     InventoryCursorAdapter mCursorAdapter;
+
+
+   // QuantityCursorAdapter mQuantityCursorAdapter;
 
     /**
      * Database helper that will provide us access to the database
@@ -72,7 +81,6 @@ public class CatalogActivity extends AppCompatActivity implements
 
         Log.v("InventoryCursorAdapter","adapter called*****");
 
-//*************************click listener not working with button
 
         // Setup the item click listener
         inventoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -200,6 +208,29 @@ public class CatalogActivity extends AppCompatActivity implements
     public void onLoaderReset(Loader<Cursor> loader) {
         // Callback called when the data needs to be deleted
         mCursorAdapter.swapCursor(null);
+    }
+
+    //decrease quantity button
+    public void decreaseCount(int columnId, int quantity){
+
+        if (quantity < 1) {
+            quantity = quantity - 1;
+            Toast.makeText(this, getString(R.string.quantity_change_inventory_failed),
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            quantity = quantity - 1;
+            Toast.makeText(this, getString(R.string.quantity_change_inventory_success),
+                    Toast.LENGTH_SHORT).show();
+
+            ContentValues values = new ContentValues();
+            values.put(InventoryContract.InventoryEntry.COLUMN_QUANTITY, quantity);
+
+            Uri updateUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, columnId);
+
+            int rowsAffected = getContentResolver().update(updateUri, values, null, null);
+
+        }
     }
 }
 

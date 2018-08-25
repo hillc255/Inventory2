@@ -32,8 +32,7 @@ import com.example.android.inventory.data.InventoryContract.InventoryEntry;
 /**
  * Allows user to create a new pet or edit an existing one.
  */
-public class EditorActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<Cursor> {
+public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
    // public Button button;
 
@@ -78,6 +77,7 @@ public class EditorActivity extends AppCompatActivity implements
      */
     private boolean mInventoryHasChanged = false;
 
+
     /**
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
      * the view, and we change the mPetHasChanged boolean to true.
@@ -91,6 +91,7 @@ public class EditorActivity extends AppCompatActivity implements
             return false;
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

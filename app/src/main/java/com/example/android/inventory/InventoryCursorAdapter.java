@@ -8,10 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.android.inventory.data.InventoryContract;
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
 
 /**
@@ -61,19 +64,15 @@ public class InventoryCursorAdapter extends CursorAdapter {
 
         Log.v("bindView of cursor","inside cursor*****");
 
+        final Context mContext = context;
+        final Cursor mCursor = cursor;
+      //  int row_id = cursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
+
 
         // Find individual views that we want to modify in the list item layout
         TextView nameTextView = (TextView) view.findViewById(R.id.name);
         TextView priceTextView = (TextView) view.findViewById(R.id.price);
         TextView quantityTextView = (TextView) view.findViewById(R.id.quantity);
-
-        //add button to cursor
-        Button button = (Button) view.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-
-            }
-        });
 
         // Find the columns of inventory attributes to display on MainActivity
         int nameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_NAME);
@@ -83,7 +82,8 @@ public class InventoryCursorAdapter extends CursorAdapter {
         // Read the inventory attributes from the Cursor for the current pet
         String productName = cursor.getString(nameColumnIndex);
         String productPrice = cursor.getString(priceColumnIndex);
-        String productQuantity = cursor.getString(quantityColumnIndex);
+        int productQuantity = cursor.getInt(quantityColumnIndex);
+
 
 //        // If the pet breed is empty string or null, then use some default text
 //        // that says "Unknown breed", so the TextView isn't blank.
@@ -92,8 +92,26 @@ public class InventoryCursorAdapter extends CursorAdapter {
 //        }
 
         // Update the TextViews with the attributes for the current inventory items
-        nameTextView.setText(productName);
-        priceTextView.setText("Price: " + productPrice);
-        quantityTextView.setText("Quantity: " + productQuantity);
+        nameTextView.setText("Item:  " + productName);
+        priceTextView.setText("Price:   " + productPrice);
+        quantityTextView.setText("Quantity:  " + productQuantity);
+
+        Button saleButton = view.findViewById(R.id.salebutton);
+     //   saleButton.setTag(row_id);
+        saleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int columnIdIndex = mCursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
+                int quantityIndex = mCursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
+
+                String col = mCursor.getString(columnIdIndex);
+                String quan = mCursor.getString(quantityIndex);
+
+                CatalogActivity catalogActivity = (CatalogActivity) mContext;
+                catalogActivity.decreaseCount(Integer.valueOf(col), Integer.valueOf(quan));
+            }
+        });
     }
+
 }

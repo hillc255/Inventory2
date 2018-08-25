@@ -74,6 +74,11 @@
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
     <string name="hint_pet_name">Name</string>
 
+    <string name="quantity_change_inventory_failed">There are no items.</string>
+
+    <string name="quantity_change_inventory_success">Quantity reduced by 1.</string>
+
+
     <!-- Text hint for breed field in the editor [CHAR LIMIT=30] -->
     <!--<string name="hint_pet_breed">Breed</string>-->
 
