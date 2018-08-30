@@ -154,7 +154,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
             }
 
             }
-            
+
             db.close();
 
         }

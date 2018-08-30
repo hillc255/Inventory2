@@ -18,6 +18,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
+    android:background="@color/white"
     tools:context=".EditorActivity">
 
     <!-- Overview category -->
@@ -53,15 +54,41 @@
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/absoluteLayout1">
+
+                <!-- Quantity minus button field -->
+
+                <ImageButton
+                    android:id="@+id/minusButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/white"
+                    android:src="@drawable/minus" />
+
             <!-- Quantity field -->
             <EditText
                 android:id="@+id/edit_quantity"
+                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_toRightOf="@+id/minusButton"
                 android:hint="Quantity"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
+                android:gravity="center"
+                android:inputType="textCapWords" />
 
-            <!-- Quantity button field -->
+                <!-- Quantity plus button field -->
 
+                <ImageButton
+                    android:id="@+id/plusButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/edit_quantity"
+                    android:backgroundTint="@android:color/white"
+                    android:src="@drawable/add" />
+
+            </RelativeLayout>
 
         </LinearLayout>
     </LinearLayout>
