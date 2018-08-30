@@ -226,16 +226,5 @@ public class CatalogActivity extends AppCompatActivity implements
         }
     }
 
-//    public Cursor getQuantity(SQLiteDatabase db, int position ){
-//
-//        Log.v("getQuantity****", "inside getQuantity");
-//
-//        int columnIndex = position;
-//
-//        Cursor cursor = db.rawQuery("SELECT * FROM " + InventoryContract.InventoryEntry.COLUMN_QUANTITY + " WHERE " +
-//                InventoryContract.InventoryEntry._ID + " = " + columnIndex + "", null);
-//
-//        return cursor;
-//    }
 }
 

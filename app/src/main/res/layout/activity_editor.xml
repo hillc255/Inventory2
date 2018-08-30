@@ -66,7 +66,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/white"
-                    android:src="@drawable/minus" />
+                    android:src="@drawable/minus"
+                    android:clickable="true"/>
 
             <!-- Quantity field -->
             <EditText
@@ -86,6 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/edit_quantity"
                     android:backgroundTint="@android:color/white"
+                    android:clickable="true"
                     android:src="@drawable/add" />
 
             </RelativeLayout>

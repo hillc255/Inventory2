@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TableRow;
@@ -113,9 +114,10 @@ public class InventoryCursorAdapter extends CursorAdapter {
         Button button = (Button)view.findViewById(R.id.salebutton);
         int columnIdIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
         int quantityIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
-        button.setOnClickListener(new OnItemClickListener(cursor.getInt(columnIdIndex)));
 
+        button.setOnClickListener(new OnItemClickListener(cursor.getInt(columnIdIndex)));
         Log.v("****bindView", "row: " + cursor.getInt(columnIdIndex));
+
     }
 
     private class OnItemClickListener implements View.OnClickListener {
