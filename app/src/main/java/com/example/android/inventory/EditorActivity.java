@@ -59,19 +59,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private EditText mSuppliernameEditText;
     private EditText mSupplierphoneEditText;
 
-
-    /**
-     * EditText field to enter the pet's gender
-     */
-//    private Spinner mGenderSpinner;
-//
-//    /**
-//     * Gender of the pet. The possible valid values are in the PetContract.java file:
-//     * {@link PetEntry#GENDER_UNKNOWN}, {@link PetEntry#GENDER_MALE}, or
-//     * {@link PetEntry#GENDER_FEMALE}.
-//     */
-//    private int mGender = PetEntry.GENDER_UNKNOWN;
-
     /**
      * Boolean flag that keeps track of whether the pet has been edited (true) or not (false)
      */
@@ -132,8 +119,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mSuppliernameEditText = (EditText) findViewById(R.id.edit_suppliername);
         mSupplierphoneEditText = (EditText) findViewById(R.id.edit_supplierphone);
 
-        //  mGenderSpinner = (Spinner) findViewById(R.id.spinner_gender);
-
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
         // or not, if the user tries to leave the editor without saving.
@@ -142,19 +127,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mQuantityEditText.setOnTouchListener(mTouchListener);
         mSuppliernameEditText.setOnTouchListener(mTouchListener);
         mSupplierphoneEditText.setOnTouchListener(mTouchListener);
-        //  mGenderSpinner.setOnTouchListener(mTouchListener);
 
-        //     setupSpinner();
-
-//        Button button2 = (Button) findViewById(R.id.quantitybutton);
-//        button2.setOnClickListener(new View.OnClickListener(){
-//            //@Override
-//            public void onClick(View v){
-//                // Do something in response to button click
-//            }
-//        });
     }
-//
+
     /**
      * Setup the dropdown spinner that allows the user to select the gender of the pet.
      */
@@ -223,13 +198,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         ContentValues values = new ContentValues();
         values.put(InventoryEntry.COLUMN_PRODUCT_NAME, nameString);
         values.put(InventoryEntry.COLUMN_PRICE, priceString);
-        // values.put(PetEntry.COLUMN_PET_GENDER, mGender);
-        // If the weight is not provided by the user, don't try to parse the string into an
-        // integer value. Use 0 by default.
-//        int weight = 0;
-//        if (!TextUtils.isEmpty(weightString)) {
-//            weight = Integer.parseInt(weightString);
-//        }
         values.put(InventoryEntry.COLUMN_QUANTITY, quantityString);
         values.put(InventoryEntry.COLUMN_SUPPLIER, suppliernameString);
         values.put(InventoryEntry.COLUMN_PHONE, supplierphoneString);

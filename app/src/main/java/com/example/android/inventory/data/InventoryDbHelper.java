@@ -3,6 +3,7 @@ package com.example.android.inventory.data;
 // Based on Udacity's Pets program: https://github.com/udacity/ud845-Pets
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -21,7 +22,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
     /**
      * Name of the database file
      */
-    private static final String DATABASE_NAME = "inventory2.db";
+    private static final String DATABASE_NAME = "inventory1.db";
 
     /**
      * Database version. If you change the database schema, you must increment the database version.
@@ -65,4 +66,5 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
 //            onCreate(db);
 //        }
     }
+
 }

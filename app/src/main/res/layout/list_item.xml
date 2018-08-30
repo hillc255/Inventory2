@@ -16,7 +16,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:id="@+id/linearlayout"
     android:padding="30dp">
+
 
     <TextView
         android:id="@+id/name"
@@ -63,7 +65,6 @@
             android:onClick="onClick"
             android:focusable="false"
             android:focusableInTouchMode="false"/>
-
 
     </LinearLayout>
 

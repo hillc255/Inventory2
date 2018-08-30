@@ -8,13 +8,11 @@ import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
-import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -22,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.inventory.data.InventoryContract;
@@ -43,9 +40,6 @@ public class CatalogActivity extends AppCompatActivity implements
     /** Adapter for the ListView */
     InventoryCursorAdapter mCursorAdapter;
 
-
-   // QuantityCursorAdapter mQuantityCursorAdapter;
-
     /**
      * Database helper that will provide us access to the database
      */
@@ -56,6 +50,7 @@ public class CatalogActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
 
+   //     InventoryDbHelper db = new InventoryDbHelper(this);
 
         // Setup FAB to open EditorActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -69,7 +64,6 @@ public class CatalogActivity extends AppCompatActivity implements
 
         // Find the ListView which will be populated with the pet data
         ListView inventoryListView = (ListView) findViewById(R.id.list);
-
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
         inventoryListView.setEmptyView(emptyView);
@@ -81,17 +75,14 @@ public class CatalogActivity extends AppCompatActivity implements
 
         Log.v("InventoryCursorAdapter","adapter called*****");
 
-
         // Setup the item click listener
         inventoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
                 Log.v("OnItemclicklistener","inside onitemclick*****");
-
                 // Create new intent to go to {@link EditorActivity}
                 Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
-
                 Log.v("OnItemClickListener","item is clicked*****");
 
 
@@ -213,6 +204,8 @@ public class CatalogActivity extends AppCompatActivity implements
     //decrease quantity button
     public void decreaseCount(int columnId, int quantity){
 
+        Log.v("decreaseCount****", "quantity: " + String.valueOf(quantity));
+
         if (quantity < 1) {
             quantity = quantity - 1;
             Toast.makeText(this, getString(R.string.quantity_change_inventory_failed),
@@ -232,5 +225,17 @@ public class CatalogActivity extends AppCompatActivity implements
 
         }
     }
+
+//    public Cursor getQuantity(SQLiteDatabase db, int position ){
+//
+//        Log.v("getQuantity****", "inside getQuantity");
+//
+//        int columnIndex = position;
+//
+//        Cursor cursor = db.rawQuery("SELECT * FROM " + InventoryContract.InventoryEntry.COLUMN_QUANTITY + " WHERE " +
+//                InventoryContract.InventoryEntry._ID + " = " + columnIndex + "", null);
+//
+//        return cursor;
+//    }
 }
 

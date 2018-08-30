@@ -2,8 +2,16 @@ package com.example.android.inventory;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
+import android.provider.BaseColumns;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +19,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.android.inventory.data.InventoryContract;
+import com.example.android.inventory.data.InventoryDbHelper;
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
+import com.example.android.inventory.CatalogActivity;
+
+import static com.example.android.inventory.data.InventoryContract.InventoryEntry.TABLE_NAME;
+import com.example.android.inventory.data.InventoryDbHelper;
 
 /**
  * {@link InventoryCursorAdapter} is an adapter for a list or grid view
@@ -24,6 +39,12 @@ import com.example.android.inventory.data.InventoryContract.InventoryEntry;
  */
 public class InventoryCursorAdapter extends CursorAdapter {
 
+
+
+    private Context mContext;
+
+
+
     /**
      * Constructs a new {@link InventoryCursorAdapter}.
      *
@@ -31,7 +52,9 @@ public class InventoryCursorAdapter extends CursorAdapter {
      * @param c       The cursor from which to get the data.
      */
     public InventoryCursorAdapter(Context context, Cursor c) {
+
         super(context, c, 0 /* flags */);
+        this.mContext=context;
     }
 
     /**
@@ -49,6 +72,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
         return LayoutInflater.from(context).inflate(R.layout.list_item, parent, false);
     }
 
+
     /**
      * This method binds the pet data (in the current row pointed to by cursor) to the given
      * list item layout. For example, the name for the current pet can be set on the name TextView
@@ -62,12 +86,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
-        Log.v("bindView of cursor","inside cursor*****");
-
-        final Context mContext = context;
-        final Cursor mCursor = cursor;
-      //  int row_id = cursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
-
+        Log.v("bindView of cursor", "inside cursor*****");
 
         // Find individual views that we want to modify in the list item layout
         TextView nameTextView = (TextView) view.findViewById(R.id.name);
@@ -85,33 +104,62 @@ public class InventoryCursorAdapter extends CursorAdapter {
         int productQuantity = cursor.getInt(quantityColumnIndex);
 
 
-//        // If the pet breed is empty string or null, then use some default text
-//        // that says "Unknown breed", so the TextView isn't blank.
-//        if (TextUtils.isEmpty(petBreed)) {
-//            petBreed = context.getString(R.string.unknown_breed);
-//        }
-
         // Update the TextViews with the attributes for the current inventory items
         nameTextView.setText("Item:  " + productName);
         priceTextView.setText("Price:   " + productPrice);
         quantityTextView.setText("Quantity:  " + productQuantity);
 
-        Button saleButton = view.findViewById(R.id.salebutton);
-     //   saleButton.setTag(row_id);
-        saleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        //Button onClick to reduce quantity
+        Button button = (Button)view.findViewById(R.id.salebutton);
+        int columnIdIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
+        int quantityIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
+        button.setOnClickListener(new OnItemClickListener(cursor.getInt(columnIdIndex)));
 
-                int columnIdIndex = mCursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
-                int quantityIndex = mCursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
+        Log.v("****bindView", "row: " + cursor.getInt(columnIdIndex));
+    }
 
-                String col = mCursor.getString(columnIdIndex);
-                String quan = mCursor.getString(quantityIndex);
+    private class OnItemClickListener implements View.OnClickListener {
+        private int position;
 
-                CatalogActivity catalogActivity = (CatalogActivity) mContext;
-                catalogActivity.decreaseCount(Integer.valueOf(col), Integer.valueOf(quan));
+
+        public OnItemClickListener(int position) {
+            super();
+            this.position = position;
+            Log.v("****OnItemClickListener", "inside method");
+        }
+
+
+        @Override
+        public void onClick(View view) {
+
+            int columnIndex = position;
+
+          SQLiteOpenHelper helper = new InventoryDbHelper(mContext);
+          SQLiteDatabase db = helper.getReadableDatabase();
+
+
+        Cursor cursor = db.rawQuery("SELECT "+InventoryContract.InventoryEntry.COLUMN_QUANTITY+" FROM " + TABLE_NAME + " WHERE " +
+                InventoryContract.InventoryEntry._ID + " = " + columnIndex + "", null);
+
+                    Log.v("onClick****", "cursor: " + cursor);
+
+            if( cursor != null && cursor.moveToFirst() ){
+                String quan = cursor.getString(cursor.getColumnIndex("quantity"));
+                cursor.close();
+
+                Log.v("onClick****", "quan: " + quan);
+
+            if(mContext instanceof CatalogActivity){
+                ((CatalogActivity)mContext).decreaseCount(columnIndex, Integer.valueOf(quan));;
             }
-        });
+
+            }
+            
+            db.close();
+
+        }
+
+
     }
 
 }
