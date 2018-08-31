@@ -18,7 +18,7 @@
     <string name="editor_activity_title_new_product">Add a Product</string>
 
     <!-- Title for the activity to edit an existing pet [CHAR LIMIT=20] -->
-    <string name="editor_activity_title_edit_product">Edit Product</string>
+    <string name="editor_activity_title_edit_product">Edit Inventory</string>
 
     <!-- Label for editor menu option to save pet and leave editor [CHAR LIMIT=20] -->
     <string name="action_save">Save</string>
@@ -77,6 +77,9 @@
     <string name="quantity_change_inventory_failed">There are no items.</string>
 
     <string name="quantity_change_inventory_success">Quantity reduced by 1.</string>
+
+
+    <string name="item_delete_success">Item deleted successfully</string>
 
 
     <!-- Text hint for breed field in the editor [CHAR LIMIT=30] -->

@@ -60,12 +60,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private Uri mCurrentInventoryUri;
 
     /**
-     * EditText field to enter the pet's name
+     * EditText field to enter item name
      */
     private EditText mNameEditText;
 
     /**
-     * EditText field to enter the pet's breed
+     * EditText field to enter other item information
      */
     private EditText mPriceEditText;
     private EditText mQuantityEditText;
@@ -73,7 +73,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private EditText mSupplierphoneEditText;
 
     /**
-     * Boolean flag that keeps track of whether the pet has been edited (true) or not (false)
+     * Boolean flag that keeps track of whether the inventory item has been edited (true) or not (false)
      */
     private boolean mInventoryHasChanged = false;
 
@@ -99,28 +99,35 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         setContentView(R.layout.activity_editor);
 
         // Examine the intent that was used to launch this activity,
-        // in order to figure out if we're creating a new pet or editing an existing one.
+        // in order to figure out if we're creating a new inventory item or editing an existing one.
         Intent intent = getIntent();
         mCurrentInventoryUri = intent.getData();
 
         Log.v("OnCreate EditorActivity","activity_editor*****");
 
-        // If the intent DOES NOT contain a pet content URI, then we know that we are
-        // creating a new pet.
+        // If the intent DOES NOT contain an item content URI, then we know that we are
+        // creating a new inventory item
         if (mCurrentInventoryUri == null) {
-            // This is a new pet, so change the app bar to say "Add a Pet"
+            // This is a new item, so change the app bar to say "Add Product"
             setTitle(getString(R.string.editor_activity_title_new_product));
 
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a pet that hasn't been created yet.)
+
+            Button buttonItemDelete = findViewById(R.id.deleteButton);
+            buttonItemDelete.setVisibility(View.INVISIBLE);
             invalidateOptionsMenu();
         } else {
-            // Otherwise this is an existing pet, so change app bar to say "Edit Pet"
+
+            Button buttonItemDelete = findViewById(R.id.deleteButton);
+            buttonItemDelete.setVisibility(View.VISIBLE);
+
+            // Otherwise this is an existing inventory item, so change app bar to say "Edit Product"
             setTitle(getString(R.string.editor_activity_title_edit_product));
 
             Log.v("edit intent","edit pet - get ready for loader");
 
-            // Initialize a loader to read the pet data from the database
+            // Initialize a loader to read the product data from the database
             // and display the current values in the editor
             getLoaderManager().initLoader(EXISTING_INVENTORY_LOADER, null, this);
         }
@@ -132,9 +139,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mSuppliernameEditText = (EditText) findViewById(R.id.edit_suppliername);
         mSupplierphoneEditText = (EditText) findViewById(R.id.edit_supplierphone);
 
-
-        ImageButton buttonInc= findViewById(R.id.minusButton);
-        ImageButton buttonDec= findViewById(R.id.plusButton);
+//
+//        ImageButton buttonInc= findViewById(R.id.minusButton);
+//        ImageButton buttonDec= findViewById(R.id.plusButton);
+//        Button buttonItemDelete = findViewById(R.id.deleteButton);
 
         Log.v("****onCreateEdit", "find button views");
 
@@ -149,7 +157,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
 
 
-        buttonDec = findViewById(R.id.minusButton);
+        ImageButton buttonDec = findViewById(R.id.minusButton);
         buttonDec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,7 +179,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
         });
 
-        buttonInc = findViewById(R.id.plusButton);
+        ImageButton buttonInc = findViewById(R.id.plusButton);
         buttonInc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -185,6 +193,22 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 int rowsAffected = getContentResolver().update(mCurrentInventoryUri, values2, null, null);
             }
         });
+
+        Button buttonItemDelete = findViewById(R.id.deleteButton);
+        buttonItemDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ContentValues values3 = new ContentValues();
+                int rowsAffected = getContentResolver().delete(mCurrentInventoryUri, null, null);
+
+                Toast.makeText(getApplicationContext(), getString(R.string.item_delete_success),
+                        Toast.LENGTH_SHORT).show();
+
+                // Close the activity
+                finish();
+            }
+        });
     }
 
 
@@ -193,7 +217,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      */
     private void saveInventory() {
         // Read from input fields
-        // Use trim to eliminate leading or trailing white space
+        // Use trim to eliminate leading or trailing white spacea
         String nameString = mNameEditText.getText().toString().trim();
         String priceString = mPriceEditText.getText().toString().trim();
         String quantityString = mQuantityEditText.getText().toString().trim();
@@ -301,7 +325,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 return true;
             // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
-                // If the pet hasn't changed, continue with navigating up to parent activity
+                // If the item hasn't changed, continue with navigating up to parent activity
                 // which is the {@link CatalogActivity}.
                 if (!mInventoryHasChanged) {
                     NavUtils.navigateUpFromSameTask(EditorActivity.this);
@@ -355,8 +379,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        // Since the editor shows all pet attributes, define a projection that contains
-        // all columns from the pet table
+        // Since the editor shows all inventory attributes, define a projection that contains
+        // all columns from the inventory table
         String[] projection = {
                 InventoryEntry._ID,
                 InventoryEntry.COLUMN_PRODUCT_NAME,
@@ -385,7 +409,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // Proceed with moving to the first row of the cursor and reading data from it
         // (This should be the only row in the cursor)
         if (cursor.moveToFirst()) {
-            // Find the columns of pet attributes that we're interested in
+            // Find the columns of inventory attributes that we're interested in
             int nameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_NAME);
             int priceColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRICE);
             int quantityColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_QUANTITY);
@@ -436,7 +460,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         builder.setNegativeButton(R.string.keep_editing, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Keep editing" button, so dismiss the dialog
-                // and continue editing the pet.
+                // and continue editing the inventory.
                 if (dialog != null) {
                     dialog.dismiss();
                 }
@@ -449,7 +473,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     }
 
     /**
-     * Prompt the user to confirm that they want to delete this pet.
+     * Prompt the user to confirm that they want to delete this inventory item.
      */
     private void showDeleteConfirmationDialog() {
         // Create an AlertDialog.Builder and set the message, and click listeners
@@ -478,9 +502,33 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     }
 
     /**
-     * Perform the deletion of the pet in the database.
+     * Perform the deletion of the item in the database.
      */
     private void deleteInventory() {
+        // Only perform the delete if this is an existing items in inventory
+        if (mCurrentInventoryUri != null) {
+            // Call the ContentResolver to delete the items at the given content URI.
+            // Pass in null for the selection and selection args because the mCurrentPetUri
+            // content URI already identifies the pet that we want.
+            int rowsDeleted = getContentResolver().delete(mCurrentInventoryUri, null, null);
+
+            // Show a toast message depending on whether or not the delete was successful.
+            if (rowsDeleted == 0) {
+                // If no rows were deleted, then there was an error with the delete.
+                Toast.makeText(this, getString(R.string.editor_delete_inventory_failed),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                // Otherwise, the delete was successful and we can display a toast.
+                Toast.makeText(this, getString(R.string.editor_delete_inventory_successful),
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        // Close the activity
+        finish();
+    }
+
+    private void deleteItemInventory() {
         // Only perform the delete if this is an existing items in inventory
         if (mCurrentInventoryUri != null) {
             // Call the ContentResolver to delete the items at the given content URI.
