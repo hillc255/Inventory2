@@ -207,7 +207,7 @@ public class CatalogActivity extends AppCompatActivity implements
         Log.v("decreaseCount****", "quantity: " + String.valueOf(quantity));
 
         if (quantity < 1) {
-            quantity = quantity - 1;
+          //  quantity = quantity - 1;
             Toast.makeText(this, getString(R.string.quantity_change_inventory_failed),
                     Toast.LENGTH_SHORT).show();
         }

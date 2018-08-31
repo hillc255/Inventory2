@@ -147,8 +147,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mSuppliernameEditText.setOnTouchListener(mTouchListener);
         mSupplierphoneEditText.setOnTouchListener(mTouchListener);
 
-      //  buttonInc.setOnTouchListener(mTouchListener);
-      //  buttonDec.setOnTouchListener(mTouchListener);
 
 
         buttonDec = findViewById(R.id.minusButton);
@@ -157,12 +155,19 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             public void onClick(View v) {
 
                 String quantityString = mQuantityEditText.getText().toString().trim();
-                int quantity = (Integer.valueOf(quantityString)) - 1;
 
-                ContentValues values2 = new ContentValues();
-                values2.put(InventoryEntry.COLUMN_QUANTITY, Integer.toString(quantity));
+                if ((Integer.valueOf(quantityString)) > 0) {
+                    int quantity = (Integer.valueOf(quantityString)) - 1;
 
-                int rowsAffected = getContentResolver().update(mCurrentInventoryUri, values2, null, null);
+                    ContentValues values2 = new ContentValues();
+                    values2.put(InventoryEntry.COLUMN_QUANTITY, Integer.toString(quantity));
+
+                    int rowsAffected = getContentResolver().update(mCurrentInventoryUri, values2, null, null);
+                } else{
+
+                    Toast.makeText(getApplicationContext(), getString(R.string.quantity_change_inventory_failed),
+                            Toast.LENGTH_SHORT).show();
+                }
         }
         });
 
@@ -400,22 +405,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             mQuantityEditText.setText(quantity);
             mSuppliernameEditText.setText(suppliername);
             mSupplierphoneEditText.setText(supplierphone);
-            //  mWeightEditText.setText(Integer.toString(weight));
-
-            // Gender is a dropdown spinner, so map the constant value from the database
-            // into one of the dropdown options (0 is Unknown, 1 is Male, 2 is Female).
-            // Then call setSelection() so that option is displayed on screen as the current selection.
-//            switch (gender) {
-//                case PetEntry.GENDER_MALE:
-//                    mGenderSpinner.setSelection(1);
-//                    break;
-//                case PetEntry.GENDER_FEMALE:
-//                    mGenderSpinner.setSelection(2);
-//                    break;
-//                default:
-//                    mGenderSpinner.setSelection(0);
-//                    break;
-//            }
         }
     }
 
