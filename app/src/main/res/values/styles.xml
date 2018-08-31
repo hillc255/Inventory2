@@ -16,6 +16,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
     <!-- Theme of the editor -->
@@ -23,6 +24,7 @@
         <item name="colorPrimary">@color/editorColorPrimary</item>
         <item name="colorPrimaryDark">@color/editorColorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
     <!-- Style for a category in the editor -->

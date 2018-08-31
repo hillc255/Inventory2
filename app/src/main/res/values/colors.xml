@@ -21,10 +21,12 @@
     <color name="colorAccent">#000000</color>
 
     <!-- Primary color for the editor -->
-    <color name="editorColorPrimary">#2D3640</color>
+    <color name="editorColorPrimary">#2B3D4D</color>
+
+    <!-- Background color -->
+    <color name="colorBackground">#FFFFFF</color>
 
     <!-- Primary dark color for the editor -->
-    <color name="editorColorPrimaryDark">#394450</color>
-
+    <color name="editorColorPrimaryDark">#2B3D4D</color>
     <color name="white">#FFFFFF</color>
 </resources>
