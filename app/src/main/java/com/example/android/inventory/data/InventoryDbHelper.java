@@ -22,7 +22,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
     /**
      * Name of the database file
      */
-    private static final String DATABASE_NAME = "inventory1.db";
+    private static final String DATABASE_NAME = "inventory8.db";
 
     /**
      * Database version. If you change the database schema, you must increment the database version.

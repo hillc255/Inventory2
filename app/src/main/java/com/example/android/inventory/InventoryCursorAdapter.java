@@ -111,7 +111,8 @@ public class InventoryCursorAdapter extends CursorAdapter {
         quantityTextView.setText("Quantity:  " + productQuantity);
 
         //Button onClick to reduce quantity
-        Button button = (Button)view.findViewById(R.id.salebutton);
+//        Button button = (Button)view.findViewById(R.id.salebutton);
+        ImageButton button = (ImageButton)view.findViewById(R.id.salebutton);
         int columnIdIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
         int quantityIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
 

@@ -1,5 +1,7 @@
 package com.example.android.inventory;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentUris;
@@ -9,13 +11,19 @@ import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -38,6 +46,7 @@ import com.example.android.inventory.data.InventoryContract;
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
 import com.example.android.inventory.data.InventoryDbHelper;
 
+import static android.Manifest.permission.READ_PHONE_STATE;
 import static com.example.android.inventory.data.InventoryContract.InventoryEntry.TABLE_NAME;
 
 /**
@@ -87,10 +96,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         public boolean onTouch(View view, MotionEvent motionEvent) {
             mInventoryHasChanged = true;
 
-            Log.v("OnTouchListener","click on view to edit**************");
+            Log.v("OnTouchListener", "click on view to edit**************");
             return false;
         }
     };
+
+   // EditText phoneNumber;
+
+    private static final int REQUEST_PHONE_CALL = 1;
+
 
 
     @Override
@@ -98,12 +112,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
+        //Get the supplier phone number
+      //  phoneNumber = (EditText) findViewById(R.id.edit_supplierphone);
+
         // Examine the intent that was used to launch this activity,
         // in order to figure out if we're creating a new inventory item or editing an existing one.
         Intent intent = getIntent();
         mCurrentInventoryUri = intent.getData();
 
-        Log.v("OnCreate EditorActivity","activity_editor*****");
+        Log.v("OnCreate EditorActivity", "activity_editor*****");
 
         // If the intent DOES NOT contain an item content URI, then we know that we are
         // creating a new inventory item
@@ -114,18 +131,20 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a pet that hasn't been created yet.)
 
-            Button buttonItemDelete = findViewById(R.id.deleteButton);
+         //   *********Button buttonItemDelete = findViewById(R.id.deleteButton);
+            FloatingActionButton buttonItemDelete = (FloatingActionButton)findViewById(R.id.deleteButton);
             buttonItemDelete.setVisibility(View.INVISIBLE);
             invalidateOptionsMenu();
         } else {
 
-            Button buttonItemDelete = findViewById(R.id.deleteButton);
+            //**********Button buttonItemDelete = findViewById(R.id.deleteButton);
+            FloatingActionButton buttonItemDelete = (FloatingActionButton)findViewById(R.id.deleteButton);
             buttonItemDelete.setVisibility(View.VISIBLE);
 
             // Otherwise this is an existing inventory item, so change app bar to say "Edit Product"
             setTitle(getString(R.string.editor_activity_title_edit_product));
 
-            Log.v("edit intent","edit pet - get ready for loader");
+            Log.v("edit intent", "edit pet - get ready for loader");
 
             // Initialize a loader to read the product data from the database
             // and display the current values in the editor
@@ -139,12 +158,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mSuppliernameEditText = (EditText) findViewById(R.id.edit_suppliername);
         mSupplierphoneEditText = (EditText) findViewById(R.id.edit_supplierphone);
 
-//
-//        ImageButton buttonInc= findViewById(R.id.minusButton);
-//        ImageButton buttonDec= findViewById(R.id.plusButton);
-//        Button buttonItemDelete = findViewById(R.id.deleteButton);
-
-        Log.v("****onCreateEdit", "find button views");
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -154,7 +167,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         mQuantityEditText.setOnTouchListener(mTouchListener);
         mSuppliernameEditText.setOnTouchListener(mTouchListener);
         mSupplierphoneEditText.setOnTouchListener(mTouchListener);
-
 
 
         ImageButton buttonDec = findViewById(R.id.minusButton);
@@ -171,12 +183,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                     values2.put(InventoryEntry.COLUMN_QUANTITY, Integer.toString(quantity));
 
                     int rowsAffected = getContentResolver().update(mCurrentInventoryUri, values2, null, null);
-                } else{
+                } else {
 
                     Toast.makeText(getApplicationContext(), getString(R.string.quantity_change_inventory_failed),
                             Toast.LENGTH_SHORT).show();
                 }
-        }
+            }
         });
 
         ImageButton buttonInc = findViewById(R.id.plusButton);
@@ -194,19 +206,47 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             }
         });
 
-        Button buttonItemDelete = findViewById(R.id.deleteButton);
+
+        FloatingActionButton buttonItemDelete = (FloatingActionButton)findViewById(R.id.deleteButton);
         buttonItemDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                ContentValues values3 = new ContentValues();
-                int rowsAffected = getContentResolver().delete(mCurrentInventoryUri, null, null);
+                showDeleteConfirmationDialog();
 
-                Toast.makeText(getApplicationContext(), getString(R.string.item_delete_success),
-                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
-                // Close the activity
-                finish();
+        ImageButton phoneButton = findViewById(R.id.phoneButton);
+        phoneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.v("onClick****", "inside phone button");
+
+                if (ActivityCompat.checkSelfPermission(getBaseContext(),
+                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+
+                    ActivityCompat.requestPermissions(
+                            EditorActivity.this,
+                            new String[]{Manifest.permission.CALL_PHONE},
+                            REQUEST_PHONE_CALL);
+
+                    Log.v("onClick****", "request permissions");
+                    return;
+                }
+
+                String number =  mSupplierphoneEditText.getText().toString().trim();
+
+                            Log.v("onClick****", "phone number: " + number);
+
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + number));
+
+                Log.v("onClick****", "setdata intent");
+                Log.v("onClick****", "start activity");
+
+                getApplicationContext().startActivity(callIntent);
             }
         });
     }
@@ -228,7 +268,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // and check if all the fields in the editor are blank
         if (mCurrentInventoryUri == null &&
                 TextUtils.isEmpty(nameString) && TextUtils.isEmpty(nameString)) //&&
-        //  TextUtils.isEmpty(priceString) && mPrice == InventoryEntry.GENDER_UNKNOWN)
         {
             // Since no fields were modified, we can return early without creating a new item.
             // No need to create ContentValues and no need to do any ContentProvider operations.
@@ -255,10 +294,20 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 // If the new content URI is null, then there was an error with insertion.
                 Toast.makeText(this, getString(R.string.editor_insert_inventory_failed),
                         Toast.LENGTH_SHORT).show();
+
             } else {
                 // Otherwise, the insertion was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.editor_insert_inventory_successful),
-                        Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(this, getString(R.string.editor_insert_inventory_successful),
+                //                        Toast.LENGTH_SHORT).show();
+                Toast toast = Toast.makeText(this, getString(R.string.editor_insert_inventory_successful),
+                        Toast.LENGTH_SHORT);
+                View view = toast.getView();
+                view.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
+                //Gets the TextView from the Toast so it can be editted
+                TextView text = view.findViewById(android.R.id.message);
+                text.setTextColor(Color.WHITE);
+                toast.show();
             }
         } else {
             // Otherwise this is an EXISTING item, so update the item with content URI: mCurrentInventoryUri
@@ -505,30 +554,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      * Perform the deletion of the item in the database.
      */
     private void deleteInventory() {
-        // Only perform the delete if this is an existing items in inventory
-        if (mCurrentInventoryUri != null) {
-            // Call the ContentResolver to delete the items at the given content URI.
-            // Pass in null for the selection and selection args because the mCurrentPetUri
-            // content URI already identifies the pet that we want.
-            int rowsDeleted = getContentResolver().delete(mCurrentInventoryUri, null, null);
-
-            // Show a toast message depending on whether or not the delete was successful.
-            if (rowsDeleted == 0) {
-                // If no rows were deleted, then there was an error with the delete.
-                Toast.makeText(this, getString(R.string.editor_delete_inventory_failed),
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                // Otherwise, the delete was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.editor_delete_inventory_successful),
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        // Close the activity
-        finish();
-    }
-
-    private void deleteItemInventory() {
         // Only perform the delete if this is an existing items in inventory
         if (mCurrentInventoryUri != null) {
             // Call the ContentResolver to delete the items at the given content URI.

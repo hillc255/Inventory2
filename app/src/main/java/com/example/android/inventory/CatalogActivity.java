@@ -116,13 +116,13 @@ public class CatalogActivity extends AppCompatActivity implements
      //   SQLiteDatabase db = newDbHelper.getWritableDatabase();
 
         // Create a ContentValues object where column names are the keys,
-        // and Toto's pet attributes are the values.
+        // and Inventory item attributes are the values.  This is Amazon's phone number!
         ContentValues values = new ContentValues();
         values.put(InventoryEntry.COLUMN_PRODUCT_NAME, "Book of Happiness");
         values.put(InventoryEntry.COLUMN_PRICE, 10);
-        values.put(InventoryEntry.COLUMN_QUANTITY, 1);
+        values.put(InventoryEntry.COLUMN_QUANTITY, 5);
         values.put(InventoryEntry.COLUMN_SUPPLIER, "Amazon");
-        values.put(InventoryEntry.COLUMN_PHONE, "617-555-1212");
+        values.put(InventoryEntry.COLUMN_PHONE, "18882804331");
 
         // Insert a new row for Toto in the database, returning the ID of that new row.
         // The first argument for db.insert() is the pets table name.

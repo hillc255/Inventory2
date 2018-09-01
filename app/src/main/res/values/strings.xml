@@ -78,28 +78,6 @@
 
     <string name="quantity_change_inventory_success">Quantity reduced by 1.</string>
 
-
     <string name="item_delete_success">Item deleted successfully</string>
 
-
-    <!-- Text hint for breed field in the editor [CHAR LIMIT=30] -->
-    <!--<string name="hint_pet_breed">Breed</string>-->
-
-    <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
-    <!--<string name="hint_pet_weight">Weight</string>-->
-
-    <!-- Units for weight of the pet (kilograms) [CHAR LIMIT=5] -->
-    <!--<string name="unit_pet_weight">kg</string>-->
-
-    <!-- Label for dropdown menu option if the pet's gender is unknown [CHAR LIMIT=20] -->
-    <!--<string name="gender_unknown">Unknown</string>-->
-
-    <!-- Label for dropdown menu option if the pet is male [CHAR LIMIT=20] -->
-    <!--<string name="gender_male">Male</string>-->
-
-    <!-- Label for dropdown menu option if the pet is female [CHAR LIMIT=20] -->
-    <!--<string name="gender_female">Female</string>-->
-
-    <!-- Label for the pet's breed if the breed is unknown [CHAR LIMIT=20] -->
-    <!--<string name="unknown_breed">Unknown breed</string>-->
 </resources>
