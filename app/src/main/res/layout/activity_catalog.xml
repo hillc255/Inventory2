@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/empty_subtitle_text2"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/table7"/>
+            android:src="@drawable/table"/>
 
     </RelativeLayout>
 
@@ -96,6 +96,6 @@
         android:layout_marginBottom="25dp"
         android:layout_marginRight="20dp"
         app:backgroundTint="@color/white"
-        android:src="@drawable/plus3"/>
+        android:src="@drawable/plus"/>
 
 </RelativeLayout>
