@@ -1,99 +1,96 @@
 <resources>
     <string name="app_name">Inventory</string>
-    <!-- Label for overview category of attributes in the editor [CHAR LIMIT=30] -->
 
-    <!-- Label for overflow menu option that inserts fake pet data into the app [CHAR LIMIT=20] -->
+    <!-- Menu strings -->
+
+    <!-- Label for overflow menu option that inserts fake inventory data into the app -->
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
-
-    <!-- Label for overflow menu option that deletes all pet data in the app [CHAR LIMIT=20] -->
+    <!-- Label for overflow menu option that deletes all inventory data in the app  -->
     <string name="action_delete_all_entries">Delete All Inventory</string>
 
-    <!-- Title for the activity to add a new item [CHAR LIMIT=20] -->
-    <string name="editor_activity_title_new_product">Add a Product</string>
-
-    <!-- Title for the activity to edit an existing item [CHAR LIMIT=20] -->
-    <string name="editor_activity_title_edit_product">Edit Inventory</string>
-
-    <!-- Label for editor menu option to save item and leave editor [CHAR LIMIT=20] -->
-    <string name="action_save">Save</string>
-
-    <!-- Label for editor overflow menu option that deletes the current item [CHAR LIMIT=20] -->
-    <string name="action_delete">Delete</string>
-
-    <!-- Toast message in editor when new pet has been successfully inserted [CHAR LIMIT=NONE] -->
-    <string name="editor_insert_inventory_successful">Inventory saved</string>
-
-    <!-- Toast message in editor when new pet has failed to be inserted [CHAR LIMIT=NONE] -->
-    <string name="editor_insert_inventory_failed">Error with saving inventory</string>
-
-    <!-- Toast message in editor when current pet was successfully updated [CHAR LIMIT=NONE] -->
-    <string name="editor_update_inventory_successful">Inventory updated</string>
-
-    <!-- Toast message in editor when current pet has failed to be updated [CHAR LIMIT=NONE] -->
-    <string name="editor_update_inventory_failed">Error with updating inventory</string>
-
-    <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
-    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
-
-    <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
-    <string name="discard">Discard</string>
-
-    <!-- Dialog button text for the option to keep editing the current pet [CHAR LIMIT=20] -->
-    <string name="keep_editing">Keep Editing</string>
-
-    <!-- Toast message in editor when current pet was successfully deleted [CHAR LIMIT=NONE] -->
-    <string name="editor_delete_inventory_successful">Inventory deleted</string>
-
-    <!-- Toast message in editor when current pet has failed to be deleted [CHAR LIMIT=NONE] -->
-    <string name="editor_delete_inventory_failed">Error with deleting inventory</string>
-
-    <!-- Dialog message to ask the user to confirm deleting the current pet [CHAR LIMIT=NONE] -->
-    <string name="delete_dialog_msg">Delete this inventory?</string>
-
-    <!-- Dialog button text for the option to confirm deleting the current pet [CHAR LIMIT=20] -->
-    <string name="delete">Delete</string>
-
-    <!-- Dialog button text for the option to cancel deletion of the current pet [CHAR LIMIT=20] -->
-    <string name="cancel">Cancel</string>
-
-    <!-- Label for overview category of attributes in the editor [CHAR LIMIT=30] -->
-    <string name="category_overview">Overview</string>
-
-     <!--Label for measurement information in the editor [CHAR LIMIT=30] -->
-    <string name="category_measurement">Measurement</string>
-
-    <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
-    <string name="hint_pet_name">Name</string>
-
-    <string name="quantity_change_inventory_failed">There are no products.</string>
-
-    <string name="quantity_change_inventory_success">Quantity reduced by 1.</string>
-
-    <string name="item_delete_success">Item deleted successfully</string>
+    <!-- Dummy data for insert -->
 
     <!-- Dummy product name  -->
     <string name="dummy_name">Book of Happiness</string>
-
     <!-- Dummy price -->
     <string name="dummy_price">10</string>
-
     <!-- Dummy quantity -->
     <string name="dummy_quantity">5</string>
-
     <!-- Dummy supplier name -->
     <string name="dummy_supplier">Amazon</string>
-
     <!-- Dummy phone number -->
     <string name="dummy_phone">18882804331</string>
+
+    <!-- Xml strings -->
+    <string name="main_title">Inventory Application</string>
+    <string name="sub_title">Add Inventory</string>
+    <string name="inventory_image">Shopping cart with boxes</string>
+    <string name="dbname">SQLite</string>
+    <string name="table_desc">#160;Table#160;name:#160;Inventory</string>
+
+    <!-- Edit activity strings -->
+
+    <!-- Title for the activity to add a new item -->
+    <string name="editor_activity_title_new_product">Add a Product</string>
+    <!-- Title for the activity to edit an existing item  -->
+    <string name="editor_activity_title_edit_product">Edit Inventory</string>
+    <!-- Label for editor menu option to save item and leave editor  -->
+    <string name="action_save">Save</string>
+    <!-- Label for editor overflow menu option that deletes the current item  -->
+    <string name="action_delete">Delete</string>
+
+    <!-- Toast messages -->
+
+    <!--  CatalogActivity Toasts -->
+    <string name="quantity_change_inventory_failed">There are no products</string>
+    <string name="quantity_change_inventory_success">Quantity reduced by 1</string>
+    <string name="item_delete_success">Item deleted successfully</string>
+
+    <!-- Toast message in editor when current inventory item was successfully deleted  -->
+    <string name="editor_delete_inventory_successful">Inventory deleted</string>
+    <!-- Toast message in editor when current inventory item has failed to be deleted  -->
+    <string name="editor_delete_inventory_failed">Error with deleting inventory</string>
+    <!-- Toast message in editor when new inventory item has been successfully inserted  -->
+    <string name="editor_insert_inventory_successful">Inventory saved</string>
+    <!-- Toast message in editor when new inventory item has failed to be inserted  -->
+    <string name="editor_insert_inventory_failed">Error with saving inventory</string>
+    <!-- Toast message in editor when current inventory item was successfully updated  -->
+    <string name="editor_update_inventory_successful">Inventory updated</string>
+    <!-- Toast message in editor when current inventory item has failed to be updated  -->
+    <string name="editor_update_inventory_failed">Error with updating inventory</string>
+
+    <!-- Dialog messages -->
+
+    <!-- Dialog message when user is leaving editor but hasn't saved changes  -->
+    <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
+    <!-- Dialog button text for the option to discard a user's changes  -->
+    <string name="discard">Discard</string>
+    <!-- Dialog button text for the option to keep editing the current inventory item -->
+    <string name="keep_editing">Keep Editing</string>
+    <!-- Dialog message to ask the user to confirm deleting the current inventory item  -->
+    <string name="delete_dialog_msg">Delete this inventory?</string>
+    <!-- Dialog button text for the option to confirm deleting the current inventory item -->
+    <string name="delete">Delete</string>
+    <!-- Dialog button text for the option to cancel deletion of the current inventory item -->
+    <string name="cancel">Cancel</string>
+
+    <!-- Edit labels -->
+
+    <!-- Label for overview category of attributes in the editor -->
+    <string name="category_overview">Overview</string>
+
+    <!-- Hints -->
+
+    <!-- Text hint for name field in the editor  -->
+    <string name="hint_pet_name">Name</string>
+
 
     <!-- InventoryCursorAdapter labels for product, price, quantity values -->
 
     <!-- Cursor set text product -->
     <string name="text_product">Product:&#160;&#160;&#160;&#160;&#160;&#160;</string>
-
     <!-- Cursor set text price -->
     <string name="text_price">Price:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</string>
-
     <!-- Cursor set text quantity -->
     <string name="text_quantity">Quantity:&#160;&#160;&#160;&#160;&#160;&#160;</string>
 

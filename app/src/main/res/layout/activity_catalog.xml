@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif-medium"
-            android:text="Inventory Application"
+            android:text="@string/main_title"
             android:textColor="#000000"
             android:textAppearance="?android:textAppearanceMedium"/>
 
@@ -41,13 +41,14 @@
             android:fontFamily="sans-serif"
             android:paddingTop="10dp"
             android:paddingBottom="20dp"
-            android:text="Add Inventory"
+            android:text="@string/sub_title"
             android:textAppearance="?android:textAppearanceSmall" />
 
         <ImageView
             android:id="@+id/inventory_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/inventory_image"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/empty_subtitle_text"
             android:src="@drawable/inventory"/>
@@ -60,7 +61,7 @@
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif-medium"
             android:paddingTop="8dp"
-            android:text="SQLite"
+            android:text="@string/dbname"
             android:textColor="#000000"
             android:textAppearance="?android:textAppearanceMedium" />
 
@@ -72,7 +73,7 @@
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif"
             android:paddingTop="8dp"
-            android:text=" Table name: Inventory"
+            android:text="@string/table_desc"
             android:textColor="#000000"
             android:textAppearance="?android:textAppearanceSmall" />
 
@@ -95,6 +96,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="25dp"
         android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
         app:backgroundTint="@color/white"
         android:src="@drawable/plus"/>
 
