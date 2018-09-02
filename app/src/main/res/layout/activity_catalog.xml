@@ -39,8 +39,8 @@
             android:layout_below="@+id/empty_title_text"
             android:layout_centerHorizontal="true"
             app:fontFamily="sans-serif"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
+            android:paddingTop="@dimen/padding_small"
+            android:paddingBottom="@dimen/padding_medium"
             android:text="@string/sub_title"
             android:textAppearance="?android:textAppearanceSmall" />
 
@@ -60,7 +60,7 @@
             android:layout_below="@+id/inventory_image"
             android:layout_centerHorizontal="true"
             app:fontFamily="sans-serif-medium"
-            android:paddingTop="8dp"
+            android:paddingTop="@dimen/padding_verysmall"
             android:text="@string/dbname"
             android:textColor="@color/colorBackground"
             android:textAppearance="?android:textAppearanceMedium" />
@@ -72,7 +72,7 @@
             android:layout_below="@+id/empty_title_text2"
             android:layout_centerHorizontal="true"
             app:fontFamily="sans-serif"
-            android:paddingTop="8dp"
+            android:paddingTop="@dimen/padding_verysmall"
             android:text="@string/table_desc"
             android:textColor="@color/colorBackground"
             android:textAppearance="?android:textAppearanceSmall" />
@@ -95,9 +95,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="25dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="@dimen/padding_mediumlg"
+        android:layout_marginRight="@dimen/padding_medium"
+        android:layout_marginEnd="@dimen/padding_medium"
         app:backgroundTint="@color/white"
         android:src="@drawable/plus"/>
 
