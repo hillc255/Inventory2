@@ -6,7 +6,6 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,7 +19,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -36,10 +34,6 @@ import com.example.android.inventory.data.InventoryContract.InventoryEntry;
  */
 public class EditorActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
-
-    private Context mContext;
-
-    private Cursor cursor2;
 
     /**
      * Identifier for the inventory data loader
@@ -77,12 +71,7 @@ public class EditorActivity extends AppCompatActivity implements
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
-            Log.v("****Touchlistener", "inside method - before true");
-
             mInventoryHasChanged = true;
-
-            Log.v("****Touchlistener", "inside method");
-
             return false;
         }
     };
@@ -105,25 +94,18 @@ public class EditorActivity extends AppCompatActivity implements
             // This is a new item, so change the app bar to say "Add Product"
             setTitle(getString(R.string.editor_activity_title_new_product));
 
-            Log.v("******edit create", "get ready to add a product");
-
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
-            FloatingActionButton buttonItemDelete = (FloatingActionButton) findViewById(R.id.deleteButton);
+            FloatingActionButton buttonItemDelete = findViewById(R.id.deleteButton);
             buttonItemDelete.setVisibility(View.INVISIBLE);
 
             invalidateOptionsMenu();
         } else {
 
-            Log.v("******edit intent", "before set edit title and activity");
-
-
-            FloatingActionButton buttonItemDelete = (FloatingActionButton) findViewById(R.id.deleteButton);
+            FloatingActionButton buttonItemDelete = findViewById(R.id.deleteButton);
             buttonItemDelete.setVisibility(View.VISIBLE);
 
             // Otherwise this is an existing inventory item, so change app bar to say "Edit Product"
             setTitle(getString(R.string.editor_activity_title_edit_product));
-
-            Log.v("******edit intent", "edit item - get ready for loader");
 
             // Initialize a loader to read the product data from the database
             // and display the current values in the editor
@@ -131,11 +113,11 @@ public class EditorActivity extends AppCompatActivity implements
         }
 
         // Find all relevant views that we will need to read user input from
-        mNameEditText = (EditText) findViewById(R.id.edit_name);
-        mPriceEditText = (EditText) findViewById(R.id.edit_price);
-        mQuantityEditText = (EditText) findViewById(R.id.edit_quantity);
-        mSuppliernameEditText = (EditText) findViewById(R.id.edit_suppliername);
-        mSupplierphoneEditText = (EditText) findViewById(R.id.edit_supplierphone);
+        mNameEditText = findViewById(R.id.edit_name);
+        mPriceEditText = findViewById(R.id.edit_price);
+        mQuantityEditText = findViewById(R.id.edit_quantity);
+        mSuppliernameEditText = findViewById(R.id.edit_suppliername);
+        mSupplierphoneEditText = findViewById(R.id.edit_supplierphone);
 
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
@@ -185,7 +167,7 @@ public class EditorActivity extends AppCompatActivity implements
         });
 
 
-        FloatingActionButton buttonItemDelete = (FloatingActionButton) findViewById(R.id.deleteButton);
+        FloatingActionButton buttonItemDelete = findViewById(R.id.deleteButton);
         buttonItemDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,8 +182,6 @@ public class EditorActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
 
-                Log.v("onClick****", "inside phone button");
-
                 if (ActivityCompat.checkSelfPermission(getBaseContext(),
                         Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 
@@ -209,26 +189,18 @@ public class EditorActivity extends AppCompatActivity implements
                             EditorActivity.this,
                             new String[]{Manifest.permission.CALL_PHONE},
                             REQUEST_PHONE_CALL);
-
-                    Log.v("onClick****", "request permissions");
                     return;
                 }
 
                 String number = mSupplierphoneEditText.getText().toString().trim();
 
-                Log.v("onClick****", "phone number: " + number);
-
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:" + number));
-
-                Log.v("onClick****", "setdata intent");
-                Log.v("onClick****", "start activity");
 
                 getApplicationContext().startActivity(callIntent);
             }
         });
     }
-
 
     /**
      * Get user input from editor and save inventory into database.
@@ -278,14 +250,6 @@ public class EditorActivity extends AppCompatActivity implements
 
                 Toast.makeText(this, getString(R.string.editor_insert_inventory_successful),
                         Toast.LENGTH_SHORT).show();
-//                Toast toast = Toast.makeText(this, getString(R.string.editor_insert_inventory_successful),
-//                        Toast.LENGTH_SHORT);
-//                View view = toast.getView();
-//                view.getBackground().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
-//                //Gets the TextView from the Toast so it can be editted
-//                TextView text = view.findViewById(android.R.id.message);
-//                text.setTextColor(Color.WHITE);
-//                toast.show();
             }
         } else {
             // Otherwise this is an EXISTING item, so update the item with content URI: mCurrentInventoryUri
@@ -338,9 +302,6 @@ public class EditorActivity extends AppCompatActivity implements
             case R.id.action_save:
                 // Save inventory to database
                 saveInventory();
-
-                Log.v("onOptionsItemSelected", "save inventory to db");
-
 
                 // Exit activity
                 finish();
