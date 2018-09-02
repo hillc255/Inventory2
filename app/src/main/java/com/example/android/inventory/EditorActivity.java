@@ -59,12 +59,12 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private Cursor cursor2;
 
     /**
-     * Identifier for the pet data loader
+     * Identifier for the inventory data loader
      */
     private static final int EXISTING_INVENTORY_LOADER = 0;
 
     /**
-     * Content URI for the existing pet (null if it's a new pet)
+     * Content URI for the existing inventory (null if it's a new inventory)
      */
     private Uri mCurrentInventoryUri;
 
@@ -95,32 +95,21 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             mInventoryHasChanged = true;
-
-            Log.v("OnTouchListener", "click on view to edit**************");
             return false;
         }
     };
 
-   // EditText phoneNumber;
-
     private static final int REQUEST_PHONE_CALL = 1;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
 
-        //Get the supplier phone number
-      //  phoneNumber = (EditText) findViewById(R.id.edit_supplierphone);
-
         // Examine the intent that was used to launch this activity,
         // in order to figure out if we're creating a new inventory item or editing an existing one.
         Intent intent = getIntent();
         mCurrentInventoryUri = intent.getData();
-
-        Log.v("OnCreate EditorActivity", "activity_editor*****");
 
         // If the intent DOES NOT contain an item content URI, then we know that we are
         // creating a new inventory item
@@ -129,15 +118,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             setTitle(getString(R.string.editor_activity_title_new_product));
 
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
-            // (It doesn't make sense to delete a pet that hasn't been created yet.)
-
-         //   *********Button buttonItemDelete = findViewById(R.id.deleteButton);
             FloatingActionButton buttonItemDelete = (FloatingActionButton)findViewById(R.id.deleteButton);
             buttonItemDelete.setVisibility(View.INVISIBLE);
             invalidateOptionsMenu();
         } else {
 
-            //**********Button buttonItemDelete = findViewById(R.id.deleteButton);
             FloatingActionButton buttonItemDelete = (FloatingActionButton)findViewById(R.id.deleteButton);
             buttonItemDelete.setVisibility(View.VISIBLE);
 

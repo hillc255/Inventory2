@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The Android Open Source Project
-     Licensed under the Apache License, Version 2.0 (the "License");
-     you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
-          http://www.apache.org/licenses/LICENSE-2.0
-     Unless required by applicable law or agreed to in writing, software
-     distributed under the License is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-     See the License for the specific language governing permissions and
-     limitations under the License.
--->
-<!-- Layout for the list of pets -->
+
+<!-- Layout for the list of inventory -->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -31,22 +22,14 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
-        <ImageView
-            android:id="@+id/inventory_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/inventory"/>
-
         <TextView
             android:id="@+id/empty_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/inventory_image"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif-medium"
-            android:paddingTop="16dp"
-            android:text="No Inventory"
+            android:text="Inventory Application"
+            android:textColor="#000000"
             android:textAppearance="?android:textAppearanceMedium"/>
 
         <TextView
@@ -56,10 +39,51 @@
             android:layout_below="@+id/empty_title_text"
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif"
-            android:paddingTop="8dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
             android:text="Add Inventory"
-            android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#A2AAB0"/>
+            android:textAppearance="?android:textAppearanceSmall" />
+
+        <ImageView
+            android:id="@+id/inventory_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/empty_subtitle_text"
+            android:src="@drawable/inventory"/>
+
+        <TextView
+            android:id="@+id/empty_title_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/inventory_image"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-medium"
+            android:paddingTop="8dp"
+            android:text="SQLite Db"
+            android:textColor="#000000"
+            android:textAppearance="?android:textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/empty_subtitle_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/empty_title_text2"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif"
+            android:paddingTop="8dp"
+            android:text=" Table name: Inventory"
+            android:textColor="#000000"
+            android:textAppearance="?android:textAppearanceSmall" />
+
+        <ImageView
+            android:id="@+id/dbinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/empty_subtitle_text2"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/table7"/>
+
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -69,7 +93,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="25dp"
         android:layout_marginRight="20dp"
         app:backgroundTint="@color/white"
         android:src="@drawable/plus3"/>

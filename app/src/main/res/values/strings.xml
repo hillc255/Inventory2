@@ -14,16 +14,16 @@
     <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
     <!--<string name="empty_view_subtitle_text">Get started by adding a pet</string>-->
 
-    <!-- Title for the activity to add a new pet [CHAR LIMIT=20] -->
+    <!-- Title for the activity to add a new item [CHAR LIMIT=20] -->
     <string name="editor_activity_title_new_product">Add a Product</string>
 
-    <!-- Title for the activity to edit an existing pet [CHAR LIMIT=20] -->
+    <!-- Title for the activity to edit an existing item [CHAR LIMIT=20] -->
     <string name="editor_activity_title_edit_product">Edit Inventory</string>
 
-    <!-- Label for editor menu option to save pet and leave editor [CHAR LIMIT=20] -->
+    <!-- Label for editor menu option to save item and leave editor [CHAR LIMIT=20] -->
     <string name="action_save">Save</string>
 
-    <!-- Label for editor overflow menu option that deletes the current pet [CHAR LIMIT=20] -->
+    <!-- Label for editor overflow menu option that deletes the current item [CHAR LIMIT=20] -->
     <string name="action_delete">Delete</string>
 
     <!-- Toast message in editor when new pet has been successfully inserted [CHAR LIMIT=NONE] -->
@@ -65,19 +65,18 @@
     <!-- Label for overview category of attributes in the editor [CHAR LIMIT=30] -->
     <string name="category_overview">Overview</string>
 
-    <!-- Label for gender information in the editor [CHAR LIMIT=30] -->
-    <!--<string name="category_gender">Gender</string>-->
-
      <!--Label for measurement information in the editor [CHAR LIMIT=30] -->
     <string name="category_measurement">Measurement</string>
 
     <!-- Text hint for name field in the editor [CHAR LIMIT=30] -->
     <string name="hint_pet_name">Name</string>
 
-    <string name="quantity_change_inventory_failed">There are no items.</string>
+    <string name="quantity_change_inventory_failed">There are no products.</string>
 
     <string name="quantity_change_inventory_success">Quantity reduced by 1.</string>
 
     <string name="item_delete_success">Item deleted successfully</string>
+
+    <string name="html">Field          Type              Constraint-Key</string>
 
 </resources>

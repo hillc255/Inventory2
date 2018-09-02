@@ -2,6 +2,7 @@ package com.example.android.inventory;
 
 // Based on Udacity's Pets program: https://github.com/udacity/ud845-Pets
 
+import android.app.Dialog;
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -14,23 +15,28 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.inventory.data.InventoryContract;
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
 import com.example.android.inventory.data.InventoryDbHelper;
 
+import java.util.function.Supplier;
+
 public class CatalogActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
 
-    /** Identifier for the pet data loader */
+    /** Identifier for the inventory data loader */
     private static final int INVENTORY_LOADER = 0;
 
 
@@ -50,8 +56,6 @@ public class CatalogActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
 
-   //     InventoryDbHelper db = new InventoryDbHelper(this);
-
         // Setup FAB to open EditorActivity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +66,7 @@ public class CatalogActivity extends AppCompatActivity implements
             }
         });
 
-        // Find the ListView which will be populated with the pet data
+        // Find the ListView which will be populated with the inventory data
         ListView inventoryListView = (ListView) findViewById(R.id.list);
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
