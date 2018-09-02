@@ -100,11 +100,11 @@ public class CatalogActivity extends AppCompatActivity implements
         // Create a ContentValues object where column names are the keys,
         // and Inventory item attributes are the values.  This is Amazon's phone number!
         ContentValues values = new ContentValues();
-        values.put(InventoryEntry.COLUMN_PRODUCT_NAME, "Book of Happiness");
-        values.put(InventoryEntry.COLUMN_PRICE, 10);
-        values.put(InventoryEntry.COLUMN_QUANTITY, 5);
-        values.put(InventoryEntry.COLUMN_SUPPLIER, "Amazon");
-        values.put(InventoryEntry.COLUMN_PHONE, "18882804331");
+        values.put(InventoryEntry.COLUMN_PRODUCT_NAME, getString(R.string.dummy_name));
+        values.put(InventoryEntry.COLUMN_PRICE, getString(R.string.dummy_price));
+        values.put(InventoryEntry.COLUMN_QUANTITY,getString(R.string.dummy_quantity));
+        values.put(InventoryEntry.COLUMN_SUPPLIER,getString(R.string.dummy_supplier));
+        values.put(InventoryEntry.COLUMN_PHONE,getString(R.string.dummy_phone));
 
         // Insert a new row in the database, returning the ID of that new row.
         Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);

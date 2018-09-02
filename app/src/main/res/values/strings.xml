@@ -96,19 +96,19 @@
     <string name="item_delete_success">Item deleted successfully</string>
 
     <!-- Dummy product name  -->
-    <string name="dummy_name">Book of Happiness</string>
+    <string name="dummy_name">Book of Happiness2</string>
 
     <!-- Dummy price -->
-    <string name="dummy_price">10</string>
+    <string name="dummy_price">102</string>
 
     <!-- Dummy queantity -->
-    <string name="dummy_quantity">5</string>
+    <string name="dummy_quantity">52</string>
 
     <!-- Dummy supplier name -->
-    <string name="dummy_supplier">Amazon</string>
+    <string name="dummy_supplier">Amazon2</string>
 
     <!-- Dummy phone number -->
-    <string name="dummy_phone">18882804331</string>
+    <string name="dummy_phone">18882804332</string>
 
 
 
