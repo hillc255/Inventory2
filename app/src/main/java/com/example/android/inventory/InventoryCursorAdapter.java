@@ -6,13 +6,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CursorAdapter;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.android.inventory.data.InventoryContract;
@@ -30,7 +28,6 @@ public class InventoryCursorAdapter extends CursorAdapter {
 
 
     private Context mContext;
-
 
     /**
      * Constructs a new {@link InventoryCursorAdapter}.
@@ -73,12 +70,10 @@ public class InventoryCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
-        Log.v("bindView of cursor", "inside cursor*****");
-
         // Find individual views that we want to modify in the list item layout
-        TextView nameTextView = (TextView) view.findViewById(R.id.name);
-        TextView priceTextView = (TextView) view.findViewById(R.id.price);
-        TextView quantityTextView = (TextView) view.findViewById(R.id.quantity);
+        TextView nameTextView = view.findViewById(R.id.name);
+        TextView priceTextView = view.findViewById(R.id.price);
+        TextView quantityTextView = view.findViewById(R.id.quantity);
 
         // Find the columns of inventory attributes to display on MainActivity
         int nameColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRODUCT_NAME);
@@ -90,31 +85,29 @@ public class InventoryCursorAdapter extends CursorAdapter {
         String productPrice = cursor.getString(priceColumnIndex);
         int productQuantity = cursor.getInt(quantityColumnIndex);
 
+        //Attributes of for the current inventory items
+        String productText = mContext.getResources().getString(R.string.text_product) + productName;
+        String priceText = mContext.getResources().getString(R.string.text_price) + productPrice;
+        String quantityText = mContext.getResources().getString(R.string.text_quantity) + productQuantity;
 
         // Update the TextViews with the attributes for the current inventory items
-        nameTextView.setText("Product:      " + productName);
-        priceTextView.setText("Price:           " + productPrice);
-        quantityTextView.setText("Quantity:      " + productQuantity);
+        nameTextView.setText(productText);
+        priceTextView.setText(priceText);
+        quantityTextView.setText(quantityText);
+
 
         //Button onClick to reduce quantity
-        Button button = (Button) view.findViewById(R.id.salebutton);
-        // ImageButton button = (ImageButton) view.findViewById(R.id.salebutton);
+        Button button = view.findViewById(R.id.salebutton);
         int columnIdIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
-        int quantityIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
-
         button.setOnClickListener(new OnItemClickListener(cursor.getInt(columnIdIndex)));
-        Log.v("****bindView", "row: " + cursor.getInt(columnIdIndex));
-
     }
 
     private class OnItemClickListener implements View.OnClickListener {
         private int position;
 
-
         public OnItemClickListener(int position) {
             super();
             this.position = position;
-            Log.v("****OnItemClickListener", "inside method");
         }
 
 
@@ -130,26 +123,18 @@ public class InventoryCursorAdapter extends CursorAdapter {
             Cursor cursor = db.rawQuery("SELECT " + InventoryContract.InventoryEntry.COLUMN_QUANTITY + " FROM " + TABLE_NAME + " WHERE " +
                     InventoryContract.InventoryEntry._ID + " = " + columnIndex + "", null);
 
-            Log.v("onClick****", "cursor: " + cursor);
-
             if (cursor != null && cursor.moveToFirst()) {
                 String quan = cursor.getString(cursor.getColumnIndex("quantity"));
                 cursor.close();
 
-                Log.v("onClick****", "quan: " + quan);
-
                 if (mContext instanceof CatalogActivity) {
                     ((CatalogActivity) mContext).decreaseCount(columnIndex, Integer.valueOf(quan));
-                    ;
                 }
 
             }
 
             db.close();
-
         }
 
-
     }
-
 }

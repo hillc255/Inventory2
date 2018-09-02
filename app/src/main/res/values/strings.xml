@@ -2,35 +2,11 @@
     <string name="app_name">Inventory</string>
     <!-- Label for overview category of attributes in the editor [CHAR LIMIT=30] -->
 
-    <!-- Name of the database -->
-    <!--<string name="content_authority">com.example.android.inventory</string>-->
-
-    <!--&lt;!&ndash; Name of the database &ndash;&gt;-->
-    <!--<string name="dbname">inventory</string>-->
-
-    <!--&lt;!&ndash; Name of the database &ndash;&gt;-->
-    <!--<string name="dbname">inventory</string>-->
-
-    <!--&lt;!&ndash; Name of the database &ndash;&gt;-->
-    <!--<string name="dbname">inventory</string>-->
-
-    <!--&lt;!&ndash; Name of the database &ndash;&gt;-->
-    <!--<string name="dbname">inventory</string>-->
-
-    <!--&lt;!&ndash; Name of the database &ndash;&gt;-->
-    <!--<string name="dbname">inventory</string>-->
-
     <!-- Label for overflow menu option that inserts fake pet data into the app [CHAR LIMIT=20] -->
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
 
     <!-- Label for overflow menu option that deletes all pet data in the app [CHAR LIMIT=20] -->
     <string name="action_delete_all_entries">Delete All Inventory</string>
-
-    <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
-    <!--<string name="empty_view_title_text">It\'s a bit lonely here...</string>-->
-
-    <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
-    <!--<string name="empty_view_subtitle_text">Get started by adding a pet</string>-->
 
     <!-- Title for the activity to add a new item [CHAR LIMIT=20] -->
     <string name="editor_activity_title_new_product">Add a Product</string>
@@ -110,8 +86,15 @@
     <!-- Dummy phone number -->
     <string name="dummy_phone">18882804331</string>
 
+    <!-- InventoryCursorAdapter labels for product, price, quantity values -->
 
+    <!-- Cursor set text product -->
+    <string name="text_product">Product:&#160;&#160;&#160;&#160;&#160;&#160;</string>
 
+    <!-- Cursor set text price -->
+    <string name="text_price">Price:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</string>
 
+    <!-- Cursor set text quantity -->
+    <string name="text_quantity">Quantity:&#160;&#160;&#160;&#160;&#160;&#160;</string>
 
 </resources>
