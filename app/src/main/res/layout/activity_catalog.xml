@@ -60,7 +60,7 @@
             android:layout_centerHorizontal="true"
             android:fontFamily="sans-serif-medium"
             android:paddingTop="8dp"
-            android:text="SQLite Db"
+            android:text="SQLite"
             android:textColor="#000000"
             android:textAppearance="?android:textAppearanceMedium" />
 
