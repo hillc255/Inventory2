@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,21 +22,14 @@ import android.widget.Toast;
 
 import com.example.android.inventory.data.InventoryContract;
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
-import com.example.android.inventory.data.InventoryDbHelper;
 
 public class CatalogActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
-
 
     /**
      * Identifier for the inventory data loader
      */
     private static final int INVENTORY_LOADER = 0;
-
-
-//    public interface BtnClickListener {
-//        public abstract void onBtnClick(int position);
-//    }
 
     /**
      * Adapter for the ListView
@@ -47,15 +39,13 @@ public class CatalogActivity extends AppCompatActivity implements
     /**
      * Database helper that will provide us access to the database
      */
-    private InventoryDbHelper newDbHelper;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalog);
 
         // Setup FAB to open EditorActivity
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,7 +55,7 @@ public class CatalogActivity extends AppCompatActivity implements
         });
 
         // Find the ListView which will be populated with the inventory data
-        ListView inventoryListView = (ListView) findViewById(R.id.list);
+        ListView inventoryListView = findViewById(R.id.list);
         // Find and set empty view on the ListView, so that it only shows when the list has 0 items.
         View emptyView = findViewById(R.id.empty_view);
         inventoryListView.setEmptyView(emptyView);
@@ -80,12 +70,8 @@ public class CatalogActivity extends AppCompatActivity implements
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-                Log.v("OnItemclicklistener", "inside onitemclick*****");
                 // Create new intent to go to {@link EditorActivity}
                 Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
-
-                Log.v("OnItemClickListener", "item is clicked*****");
-
 
                 // Form the content URI that represents the specific item that was clicked on,
                 // by appending the "id" (passed as input to this method) onto the
@@ -96,9 +82,6 @@ public class CatalogActivity extends AppCompatActivity implements
 
                 // Set the URI on the data field of the intent
                 intent.setData(currentInventoryUri);
-
-                Log.v("setData after click", "Uri on data field*****");
-
 
                 // Launch the {@link EditorActivity} to display the data for the current item.
                 startActivity(intent);
@@ -113,8 +96,6 @@ public class CatalogActivity extends AppCompatActivity implements
      * Helper method to insert hardcoded item data into the database. For debugging purposes only.
      */
     private void insertInventory() {
-        // Gets the database in write mode
-        //   SQLiteDatabase db = newDbHelper.getWritableDatabase();
 
         // Create a ContentValues object where column names are the keys,
         // and Inventory item attributes are the values.  This is Amazon's phone number!
@@ -126,14 +107,6 @@ public class CatalogActivity extends AppCompatActivity implements
         values.put(InventoryEntry.COLUMN_PHONE, "18882804331");
 
         // Insert a new row in the database, returning the ID of that new row.
-        // The first argument for db.insert() is the inventory table name.
-        // The second argument provides the name of a column in which the framework
-        // can insert NULL in the event that the ContentValues is empty (if
-        // this is set to "null", then the framework will not insert a row when
-        // there are no values).
-        // The third argument is the ContentValues object containing the info for Toto.
-        //   long newRowId = db.insert(InventoryEntry.TABLE_NAME, null, values);
-
         Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
     }
 
@@ -142,7 +115,6 @@ public class CatalogActivity extends AppCompatActivity implements
      */
     private void deleteAllInventory() {
         int rowsDeleted = getContentResolver().delete(InventoryEntry.CONTENT_URI, null, null);
-        Log.v("CatalogActivity", rowsDeleted + " rows deleted from inventory database");
     }
 
 
@@ -205,8 +177,6 @@ public class CatalogActivity extends AppCompatActivity implements
     //decrease quantity button
     public void decreaseCount(int columnId, int quantity) {
 
-        Log.v("decreaseCount****", "quantity: " + String.valueOf(quantity));
-
         if (quantity < 1) {
             //  quantity = quantity - 1;
             Toast.makeText(this, getString(R.string.quantity_change_inventory_failed),
@@ -221,7 +191,7 @@ public class CatalogActivity extends AppCompatActivity implements
 
             Uri updateUri = ContentUris.withAppendedId(InventoryContract.InventoryEntry.CONTENT_URI, columnId);
 
-            int rowsAffected = getContentResolver().update(updateUri, values, null, null);
+            getContentResolver().update(updateUri, values, null, null);
 
         }
     }
