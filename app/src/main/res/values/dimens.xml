@@ -7,10 +7,15 @@
     <!-- Common margin value used throughout the app -->
     <dimen name="activity_margin">16dp</dimen>
 
-    <!-- Common padding values used throughout the app -->
-    <dimen name="padding_verysmall">8dp</dimen>
-    <dimen name="padding_small">10dp</dimen>
-    <dimen name="padding_medium">20dp</dimen>
-    <dimen name="padding_mediumlg">25dp</dimen>
+    <!-- Common dimension values used throughout the app -->
+    <dimen name="zero">0dp</dimen>
+    <dimen name="vvsmall">4dp</dimen>
+    <dimen name="verysmall">8dp</dimen>
+    <dimen name="small">10dp</dimen>
+    <dimen name="medium">20dp</dimen>
+    <dimen name="mediumlg">25dp</dimen>
+    <dimen name="large">30dp</dimen>
+    <dimen name="verylg">40dp</dimen>
+    <dimen name="vvlarge">80dp</dimen>
 
 </resources>
