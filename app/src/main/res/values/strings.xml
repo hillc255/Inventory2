@@ -2,6 +2,24 @@
     <string name="app_name">Inventory</string>
     <!-- Label for overview category of attributes in the editor [CHAR LIMIT=30] -->
 
+    <!-- Name of the database -->
+    <!--<string name="content_authority">com.example.android.inventory</string>-->
+
+    <!--&lt;!&ndash; Name of the database &ndash;&gt;-->
+    <!--<string name="dbname">inventory</string>-->
+
+    <!--&lt;!&ndash; Name of the database &ndash;&gt;-->
+    <!--<string name="dbname">inventory</string>-->
+
+    <!--&lt;!&ndash; Name of the database &ndash;&gt;-->
+    <!--<string name="dbname">inventory</string>-->
+
+    <!--&lt;!&ndash; Name of the database &ndash;&gt;-->
+    <!--<string name="dbname">inventory</string>-->
+
+    <!--&lt;!&ndash; Name of the database &ndash;&gt;-->
+    <!--<string name="dbname">inventory</string>-->
+
     <!-- Label for overflow menu option that inserts fake pet data into the app [CHAR LIMIT=20] -->
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
 
@@ -77,6 +95,6 @@
 
     <string name="item_delete_success">Item deleted successfully</string>
 
-    <string name="html">Field          Type              Constraint-Key</string>
+    <!--<string name="html">Field          Type              Constraint-Key</string>-->
 
 </resources>

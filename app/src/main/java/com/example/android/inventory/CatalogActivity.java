@@ -2,7 +2,6 @@ package com.example.android.inventory;
 
 // Based on Udacity's Pets program: https://github.com/udacity/ud845-Pets
 
-import android.app.Dialog;
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -10,40 +9,39 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
-import android.text.Spanned;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.inventory.data.InventoryContract;
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
 import com.example.android.inventory.data.InventoryDbHelper;
 
-import java.util.function.Supplier;
-
 public class CatalogActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
 
-    /** Identifier for the inventory data loader */
+    /**
+     * Identifier for the inventory data loader
+     */
     private static final int INVENTORY_LOADER = 0;
 
 
-    public interface BtnClickListener { public abstract void onBtnClick(int position);
-    }
+//    public interface BtnClickListener {
+//        public abstract void onBtnClick(int position);
+//    }
 
-    /** Adapter for the ListView */
+    /**
+     * Adapter for the ListView
+     */
     InventoryCursorAdapter mCursorAdapter;
 
     /**
@@ -72,38 +70,37 @@ public class CatalogActivity extends AppCompatActivity implements
         View emptyView = findViewById(R.id.empty_view);
         inventoryListView.setEmptyView(emptyView);
 
-        // Setup an Adapter to create a list item for each row of pet data in the Cursor.
-        // There is no pet data yet (until the loader finishes) so pass in null for the Cursor.
+        // Setup an Adapter to create a list item for each row of inventory data in the Cursor.
+        // There is no inventory data yet (until the loader finishes) so pass in null for the Cursor.
         mCursorAdapter = new InventoryCursorAdapter(this, null);
         inventoryListView.setAdapter(mCursorAdapter);
-
-        Log.v("InventoryCursorAdapter","adapter called*****");
 
         // Setup the item click listener
         inventoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-                Log.v("OnItemclicklistener","inside onitemclick*****");
+                Log.v("OnItemclicklistener", "inside onitemclick*****");
                 // Create new intent to go to {@link EditorActivity}
                 Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
-                Log.v("OnItemClickListener","item is clicked*****");
+
+                Log.v("OnItemClickListener", "item is clicked*****");
 
 
-                // Form the content URI that represents the specific pet that was clicked on,
+                // Form the content URI that represents the specific item that was clicked on,
                 // by appending the "id" (passed as input to this method) onto the
-                // {@link PetEntry#CONTENT_URI}.
-                // For example, the URI would be "content://com.example.android.pets/pets/2"
-                // if the pet with ID 2 was clicked on.
+                // {@link InventoryEntry#CONTENT_URI}.
+                // For example, the URI would be "content://com.example.android.inventory/inventory/2"
+                // if the inventory with ID 2 was clicked on.
                 Uri currentInventoryUri = ContentUris.withAppendedId(InventoryEntry.CONTENT_URI, id);
 
                 // Set the URI on the data field of the intent
                 intent.setData(currentInventoryUri);
 
-                Log.v("setData after click","Uri on data field*****");
+                Log.v("setData after click", "Uri on data field*****");
 
 
-                // Launch the {@link EditorActivity} to display the data for the current pet.
+                // Launch the {@link EditorActivity} to display the data for the current item.
                 startActivity(intent);
             }
         });
@@ -112,12 +109,12 @@ public class CatalogActivity extends AppCompatActivity implements
         getLoaderManager().initLoader(INVENTORY_LOADER, null, this);
     }
 
-        /**
-     * Helper method to insert hardcoded pet data into the database. For debugging purposes only.
+    /**
+     * Helper method to insert hardcoded item data into the database. For debugging purposes only.
      */
     private void insertInventory() {
         // Gets the database in write mode
-     //   SQLiteDatabase db = newDbHelper.getWritableDatabase();
+        //   SQLiteDatabase db = newDbHelper.getWritableDatabase();
 
         // Create a ContentValues object where column names are the keys,
         // and Inventory item attributes are the values.  This is Amazon's phone number!
@@ -128,20 +125,20 @@ public class CatalogActivity extends AppCompatActivity implements
         values.put(InventoryEntry.COLUMN_SUPPLIER, "Amazon");
         values.put(InventoryEntry.COLUMN_PHONE, "18882804331");
 
-        // Insert a new row for Toto in the database, returning the ID of that new row.
-        // The first argument for db.insert() is the pets table name.
+        // Insert a new row in the database, returning the ID of that new row.
+        // The first argument for db.insert() is the inventory table name.
         // The second argument provides the name of a column in which the framework
         // can insert NULL in the event that the ContentValues is empty (if
         // this is set to "null", then the framework will not insert a row when
         // there are no values).
         // The third argument is the ContentValues object containing the info for Toto.
-     //   long newRowId = db.insert(InventoryEntry.TABLE_NAME, null, values);
+        //   long newRowId = db.insert(InventoryEntry.TABLE_NAME, null, values);
 
         Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
     }
 
     /**
-     * Helper method to delete all pets in the database.
+     * Helper method to delete all inventory in the database.
      */
     private void deleteAllInventory() {
         int rowsDeleted = getContentResolver().delete(InventoryEntry.CONTENT_URI, null, null);
@@ -167,8 +164,8 @@ public class CatalogActivity extends AppCompatActivity implements
                 return true;
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
-              deleteAllInventory();
-              return true;
+                deleteAllInventory();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -195,7 +192,7 @@ public class CatalogActivity extends AppCompatActivity implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        // Update {@link PetCursorAdapter} with this new cursor containing updated pet data
+        // Update {@link InventoryCursorAdapter} with this new cursor containing updated invetory data
         mCursorAdapter.swapCursor(data);
     }
 
@@ -206,16 +203,15 @@ public class CatalogActivity extends AppCompatActivity implements
     }
 
     //decrease quantity button
-    public void decreaseCount(int columnId, int quantity){
+    public void decreaseCount(int columnId, int quantity) {
 
         Log.v("decreaseCount****", "quantity: " + String.valueOf(quantity));
 
         if (quantity < 1) {
-          //  quantity = quantity - 1;
+            //  quantity = quantity - 1;
             Toast.makeText(this, getString(R.string.quantity_change_inventory_failed),
                     Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             quantity = quantity - 1;
             Toast.makeText(this, getString(R.string.quantity_change_inventory_success),
                     Toast.LENGTH_SHORT).show();

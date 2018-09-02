@@ -1,49 +1,35 @@
 package com.example.android.inventory;
 
+// Based on Udacity's Pets program: https://github.com/udacity/ud845-Pets
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
-import android.provider.BaseColumns;
-import android.support.annotation.RequiresApi;
-import android.text.TextUtils;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.android.inventory.data.InventoryContract;
-import com.example.android.inventory.data.InventoryDbHelper;
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
-import com.example.android.inventory.CatalogActivity;
+import com.example.android.inventory.data.InventoryDbHelper;
 
 import static com.example.android.inventory.data.InventoryContract.InventoryEntry.TABLE_NAME;
-import com.example.android.inventory.data.InventoryDbHelper;
 
 /**
  * {@link InventoryCursorAdapter} is an adapter for a list or grid view
- * that uses a {@link Cursor} of pet data as its data source. This adapter knows
- * how to create list items for each row of pet data in the {@link Cursor}.
+ * that uses a {@link Cursor} of inventory data as its data source. This adapter knows
+ * how to create list items for each row of inventory data in the {@link Cursor}.
  */
 public class InventoryCursorAdapter extends CursorAdapter {
 
 
-
     private Context mContext;
-
 
 
     /**
@@ -55,7 +41,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
     public InventoryCursorAdapter(Context context, Cursor c) {
 
         super(context, c, 0 /* flags */);
-        this.mContext=context;
+        this.mContext = context;
     }
 
     /**
@@ -75,8 +61,8 @@ public class InventoryCursorAdapter extends CursorAdapter {
 
 
     /**
-     * This method binds the pet data (in the current row pointed to by cursor) to the given
-     * list item layout. For example, the name for the current pet can be set on the name TextView
+     * This method binds the inventory data (in the current row pointed to by cursor) to the given
+     * list item layout. For example, the name for the current inventory can be set on the name TextView
      * in the list item layout.
      *
      * @param view    Existing view, returned earlier by newView() method
@@ -99,20 +85,20 @@ public class InventoryCursorAdapter extends CursorAdapter {
         int priceColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_PRICE);
         int quantityColumnIndex = cursor.getColumnIndex(InventoryEntry.COLUMN_QUANTITY);
 
-        // Read the inventory attributes from the Cursor for the current pet
+        // Read the inventory attributes from the Cursor for the current inventory item
         String productName = cursor.getString(nameColumnIndex);
         String productPrice = cursor.getString(priceColumnIndex);
         int productQuantity = cursor.getInt(quantityColumnIndex);
 
 
         // Update the TextViews with the attributes for the current inventory items
-        nameTextView.setText("Item:  " + productName);
-        priceTextView.setText("Price:   " + productPrice);
-        quantityTextView.setText("Quantity:  " + productQuantity);
+        nameTextView.setText("Product:      " + productName);
+        priceTextView.setText("Price:           " + productPrice);
+        quantityTextView.setText("Quantity:      " + productQuantity);
 
         //Button onClick to reduce quantity
-//        Button button = (Button)view.findViewById(R.id.salebutton);
-        ImageButton button = (ImageButton)view.findViewById(R.id.salebutton);
+        Button button = (Button) view.findViewById(R.id.salebutton);
+        // ImageButton button = (ImageButton) view.findViewById(R.id.salebutton);
         int columnIdIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry._ID);
         int quantityIndex = cursor.getColumnIndex(InventoryContract.InventoryEntry.COLUMN_QUANTITY);
 
@@ -137,24 +123,25 @@ public class InventoryCursorAdapter extends CursorAdapter {
 
             int columnIndex = position;
 
-          SQLiteOpenHelper helper = new InventoryDbHelper(mContext);
-          SQLiteDatabase db = helper.getReadableDatabase();
+            SQLiteOpenHelper helper = new InventoryDbHelper(mContext);
+            SQLiteDatabase db = helper.getReadableDatabase();
 
 
-        Cursor cursor = db.rawQuery("SELECT "+InventoryContract.InventoryEntry.COLUMN_QUANTITY+" FROM " + TABLE_NAME + " WHERE " +
-                InventoryContract.InventoryEntry._ID + " = " + columnIndex + "", null);
+            Cursor cursor = db.rawQuery("SELECT " + InventoryContract.InventoryEntry.COLUMN_QUANTITY + " FROM " + TABLE_NAME + " WHERE " +
+                    InventoryContract.InventoryEntry._ID + " = " + columnIndex + "", null);
 
-                    Log.v("onClick****", "cursor: " + cursor);
+            Log.v("onClick****", "cursor: " + cursor);
 
-            if( cursor != null && cursor.moveToFirst() ){
+            if (cursor != null && cursor.moveToFirst()) {
                 String quan = cursor.getString(cursor.getColumnIndex("quantity"));
                 cursor.close();
 
                 Log.v("onClick****", "quan: " + quan);
 
-            if(mContext instanceof CatalogActivity){
-                ((CatalogActivity)mContext).decreaseCount(columnIndex, Integer.valueOf(quan));;
-            }
+                if (mContext instanceof CatalogActivity) {
+                    ((CatalogActivity) mContext).decreaseCount(columnIndex, Integer.valueOf(quan));
+                    ;
+                }
 
             }
 

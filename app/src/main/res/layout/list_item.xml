@@ -8,7 +8,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/linearlayout"
-    android:padding="50dp">
+    android:paddingTop="30dp"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp">
 
 
     <TextView
@@ -17,7 +19,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="#000000"  />
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/price"
@@ -45,17 +47,17 @@
             android:layout_weight="1"
             android:paddingRight="80dp"/>
 
-        <ImageButton
+        <Button
             android:id="@+id/salebutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:backgroundTint="@android:color/white"
-            android:src="@drawable/sale9"
-            android:clickable="true"
-            android:onClick="onClick"
+            android:text="Sale"
+            android:fontFamily="sans-serif"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#000000"
             android:focusable="false"
-            android:focusableInTouchMode="false" />
+            android:focusableInTouchMode="false"/>
 
     </LinearLayout>
 
