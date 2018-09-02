@@ -29,4 +29,5 @@
     <!-- Primary dark color for the editor -->
     <color name="editorColorPrimaryDark">#000000</color>
     <color name="white">#FFFFFF</color>
+
 </resources>

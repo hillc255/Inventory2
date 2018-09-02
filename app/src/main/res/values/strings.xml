@@ -7,6 +7,9 @@
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
     <!-- Label for overflow menu option that deletes all inventory data in the app  -->
     <string name="action_delete_all_entries">Delete All Inventory</string>
+    <string name="action_save">Save</string>
+    <!-- Label for editor overflow menu option that deletes the current item  -->
+    <string name="action_delete">Delete</string>
 
     <!-- Dummy data for insert -->
 
@@ -36,9 +39,6 @@
     <!-- Title for the activity to edit an existing item  -->
     <string name="editor_activity_title_edit_product">Edit Inventory</string>
     <!-- Label for editor menu option to save item and leave editor  -->
-    <string name="action_save">Save</string>
-    <!-- Label for editor overflow menu option that deletes the current item  -->
-    <string name="action_delete">Delete</string>
 
     <!-- Toast messages -->
 
