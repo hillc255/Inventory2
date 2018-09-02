@@ -27,6 +27,7 @@
     <string name="inventory_image">Shopping cart with boxes</string>
     <string name="dbname">SQLite</string>
     <string name="table_desc">#160;Table#160;name:#160;Inventory</string>
+    <string name="db_types">Description of database table types</string>
 
     <!-- Edit activity strings -->
 
