@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- Layout for the editor -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/verylg"
+    android:background="@color/white"
     android:orientation="vertical"
     android:padding="@dimen/large"
-    android:background="@color/white"
-    android:layout_marginTop="@dimen/verylg"
     tools:context=".EditorActivity">
 
     <!-- Overview category -->
@@ -21,38 +20,39 @@
 
         <!-- Label -->
         <TextView
-            android:text="Product Info"
-            style="@style/CategoryStyle"/>
+            style="@style/CategoryStyle"
+            android:text="@string/product_info" />
 
         <!-- Input fields -->
         <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_width="@dimen/zero"
             android:layout_weight="2"
+            android:orientation="vertical"
             android:paddingLeft="@dimen/vvsmall"
-            android:orientation="vertical">
+            android:paddingStart="@dimen/vvsmall">
 
             <!-- Name field -->
             <EditText
                 android:id="@+id/edit_name"
-                android:hint="Name"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
+                style="@style/EditorFieldStyle"
+                android:hint="@string/hint_name"
+                android:inputType="textCapWords" />
 
             <!-- Price field -->
             <EditText
                 android:id="@+id/edit_price"
-                android:hint="Price"
+                style="@style/EditorFieldStyle"
                 android:drawableLeft="@drawable/price"
                 android:drawableStart="@drawable/price"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle" />
+                android:hint="@string/hint_price"
+                android:inputType="textCapWords" />
 
             <RelativeLayout
+                android:id="@+id/absoluteLayout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/absoluteLayout1">
+                android:gravity="center">
 
                 <!-- Quantity minus button field -->
 
@@ -61,17 +61,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/white"
-                    android:src="@drawable/minus"
-                    android:clickable="true"/>
+                    android:clickable="true"
+                    android:contentDescription="@string/reduce_quantity_btn"
+                    android:src="@drawable/minus" />
 
                 <!-- Quantity field -->
                 <EditText
                     android:id="@+id/edit_quantity"
-                    android:layout_height="wrap_content"
                     android:layout_width="@dimen/vvlarge"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/minusButton"
                     android:layout_toRightOf="@+id/minusButton"
-                    android:hint="Quantity"
                     android:gravity="center"
+                    android:hint="@string/hint_quantity"
                     android:inputType="textCapWords" />
 
                 <!-- Quantity plus button field -->
@@ -80,11 +82,14 @@
                     android:id="@+id/plusButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/edit_quantity"
                     android:layout_toRightOf="@id/edit_quantity"
                     android:backgroundTint="@android:color/white"
                     android:clickable="true"
+                    android:contentDescription="@string/increase_quantity_btn"
+                    android:focusable="false"
                     android:src="@drawable/add"
-                    android:text="Click To Call" />
+                    android:text="@string/click_call" />
 
             </RelativeLayout>
 
@@ -101,31 +106,32 @@
 
         <!-- Label -->
         <TextView
-            android:text="Supplier Info"
-            style="@style/CategoryStyle" />
+            style="@style/CategoryStyle"
+            android:text="@string/supplier_info" />
 
         <!-- Input fields -->
         <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_width="@dimen/zero"
             android:layout_weight="2"
-            android:paddingLeft="@dimen/vvsmall"
+            android:clipToPadding="false"
             android:paddingBottom="@dimen/large"
-            android:clipToPadding="false">
+            android:paddingLeft="@dimen/vvsmall"
+            android:paddingStart="@dimen/vvsmall">
 
             <EditText
                 android:id="@+id/edit_suppliername"
-                android:hint="Supplier Name"
-                android:inputType="textCapWords"
-                style="@style/EditorFieldStyle"/>
+                style="@style/EditorFieldStyle"
+                android:hint="@string/hint_supplier_name"
+                android:inputType="textCapWords" />
 
             <!-- Supplier field -->
             <EditText
                 android:id="@+id/edit_supplierphone"
-                android:hint="Supplier Phone"
-                android:inputType="textCapWords"
+                style="@style/EditorFieldStyle"
                 android:layout_below="@+id/edit_suppliername"
-                style="@style/EditorFieldStyle" />
+                android:hint="@string/hint_supplier_phone"
+                android:inputType="text" />
 
 
             <ImageButton
@@ -133,13 +139,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/edit_supplierphone"
-                android:background="#FFFFFF"
                 android:layout_centerInParent="true"
+                android:layout_marginBottom="@dimen/small"
+                android:background="@color/white"
+                android:clickable="true"
+                android:contentDescription="@string/oldphone"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:clickable="true"
-                android:src="@drawable/phone"
-                android:layout_marginBottom="@dimen/small"/>
+                android:src="@drawable/phone" />
 
             <!-- Delete item button -->
 
@@ -150,9 +157,10 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_marginEnd="@dimen/small"
                 android:layout_marginRight="@dimen/small"
-                app:backgroundTint="@color/white"
-                android:src="@drawable/cross"/>
+                android:src="@drawable/cross"
+                app:backgroundTint="@color/white" />
 
         </RelativeLayout>
 
