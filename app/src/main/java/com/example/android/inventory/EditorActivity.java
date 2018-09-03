@@ -217,7 +217,7 @@ public class EditorActivity extends AppCompatActivity implements
         // Check if this is supposed to be a new inventory item
         // and check if all the fields in the editor are blank
         if (mCurrentInventoryUri == null &&
-                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(nameString)) //&&
+                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(nameString))
         {
             // Since no fields were modified, we can return early without creating a new item.
             // No need to create ContentValues and no need to do any ContentProvider operations.

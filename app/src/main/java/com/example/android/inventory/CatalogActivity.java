@@ -102,19 +102,19 @@ public class CatalogActivity extends AppCompatActivity implements
         ContentValues values = new ContentValues();
         values.put(InventoryEntry.COLUMN_PRODUCT_NAME, getString(R.string.dummy_name));
         values.put(InventoryEntry.COLUMN_PRICE, getString(R.string.dummy_price));
-        values.put(InventoryEntry.COLUMN_QUANTITY,getString(R.string.dummy_quantity));
-        values.put(InventoryEntry.COLUMN_SUPPLIER,getString(R.string.dummy_supplier));
-        values.put(InventoryEntry.COLUMN_PHONE,getString(R.string.dummy_phone));
+        values.put(InventoryEntry.COLUMN_QUANTITY, getString(R.string.dummy_quantity));
+        values.put(InventoryEntry.COLUMN_SUPPLIER, getString(R.string.dummy_supplier));
+        values.put(InventoryEntry.COLUMN_PHONE, getString(R.string.dummy_phone));
 
         // Insert a new row in the database, returning the ID of that new row.
-        Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
+        getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
     }
 
     /**
      * Helper method to delete all inventory in the database.
      */
     private void deleteAllInventory() {
-        int rowsDeleted = getContentResolver().delete(InventoryEntry.CONTENT_URI, null, null);
+        getContentResolver().delete(InventoryEntry.CONTENT_URI, null, null);
     }
 
 
