@@ -98,4 +98,13 @@
     <!-- Cursor set text quantity -->
     <string name="text_quantity">Quantity:&#160;&#160;&#160;&#160;&#160;&#160;</string>
 
+    <!-- Checks for saving to inventory database -->
+    <string name="name_save_failed">Product name must have 1 to 20 characters</string>
+    <string name="suppliername_save_failed">Product name must have 1 to 20 characters</string>
+    <string name="price_save_failed_null">Price must have a value</string>
+    <string name="price_save_failed_double">Price must be in this format: 100.00</string>
+    <string name="price_save_failed_toohigh">Price must be less than $10000</string>
+    <string name="quantity_save_failed">Quantity must be a positive integer or at least 0</string>
+
+
 </resources>

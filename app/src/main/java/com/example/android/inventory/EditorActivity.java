@@ -19,6 +19,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -28,6 +29,8 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
+
+import org.w3c.dom.Text;
 
 /**
  * Allows user to create a new inventory item or edit an existing one.
@@ -77,6 +80,8 @@ public class EditorActivity extends AppCompatActivity implements
     };
 
     private static final int REQUEST_PHONE_CALL = 1;
+
+    Double doublePrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,58 +222,115 @@ public class EditorActivity extends AppCompatActivity implements
         // Check if this is supposed to be a new inventory item
         // and check if all the fields in the editor are blank
         if (mCurrentInventoryUri == null &&
-                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(nameString))
-        {
+                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(nameString)) {
             // Since no fields were modified, we can return early without creating a new item.
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
         }
 
-        // Create a ContentValues object where column names are the keys,
-        // and inventory attributes from the editor are the values.
-        ContentValues values = new ContentValues();
-        values.put(InventoryEntry.COLUMN_PRODUCT_NAME, nameString);
-        values.put(InventoryEntry.COLUMN_PRICE, priceString);
-        values.put(InventoryEntry.COLUMN_QUANTITY, quantityString);
-        values.put(InventoryEntry.COLUMN_SUPPLIER, suppliernameString);
-        values.put(InventoryEntry.COLUMN_PHONE, supplierphoneString);
 
-        // Determine if this is a new or existing inventory item by checking if mCurrentInventoryUri is null or not
-        if (mCurrentInventoryUri == null) {
-            // This is a NEW inventory item, so insert a new item into the provider,
-            // returning the content URI for the new item
-            Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
+        //Validate name entry - not null, any character 1-20
+        if (nameString == null || TextUtils.isEmpty(nameString) || nameString.length() < 1 || nameString.length() > 20) {
 
-            // Show a toast message depending on whether or not the insertion was successful.
-            if (newUri == null) {
-                // If the new content URI is null, then there was an error with insertion.
-                Toast.makeText(this, getString(R.string.editor_insert_inventory_failed),
-                        Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.name_save_failed),
+                    Toast.LENGTH_SHORT).show();
 
-            } else {
-                // Otherwise, the insertion was successful and we can display a toast.
-
-                Toast.makeText(this, getString(R.string.editor_insert_inventory_successful),
-                        Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            // Otherwise this is an EXISTING item, so update the item with content URI: mCurrentInventoryUri
-            // and pass in the new ContentValues. Pass in null for the selection and selection args
-            // because mCurrentInventoryUri will already identify the correct row in the database that
-            // we want to modify.
-            int rowsAffected = getContentResolver().update(mCurrentInventoryUri, values, null, null);
-
-            // Show a toast message depending on whether or not the update was successful.
-            if (rowsAffected == 0) {
-                // If no rows were affected, then there was an error with the update.
-                Toast.makeText(this, getString(R.string.editor_update_inventory_failed),
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                // Otherwise, the update was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.editor_update_inventory_successful),
-                        Toast.LENGTH_SHORT).show();
-            }
+           // finish();
+            startActivity(getIntent());
         }
+
+        //Validate supplier name entry - not null, any character 1-20
+        if (suppliernameString == null || TextUtils.isEmpty(suppliernameString) || suppliernameString.length() < 1 || suppliernameString.length() > 20) {
+
+            Toast.makeText(this, getString(R.string.suppliername_save_failed),
+                    Toast.LENGTH_SHORT).show();
+
+          //  finish();
+            startActivity(getIntent());
+        }
+        //validate price is not null
+        if (TextUtils.isEmpty(priceString)) {
+
+            Toast.makeText(this, getString(R.string.price_save_failed_null),
+                    Toast.LENGTH_SHORT).show();
+         //   finish();
+            startActivity(getIntent());
+        }
+
+//        //Validate price is a double less than 10000
+//        if (!TextUtils.isEmpty(priceString)) {
+//            //validate input is a double
+//            try {
+//                doublePrice = Double.parseDouble(priceString);
+//            } catch (NumberFormatException e) {
+//                Toast.makeText(this, getString(R.string.price_save_failed_double),
+//                        Toast.LENGTH_SHORT).show();
+//                finish();
+//                startActivity(getIntent());
+//            }
+//            if (doublePrice > 10000 ){
+//                Toast.makeText(this, getString(R.string.price_save_failed_toohigh),
+//                        Toast.LENGTH_SHORT).show();
+//                finish();
+//                startActivity(getIntent());
+//            }
+//        }
+
+        //Validate quantity entry - not null nor empty, and an integer
+        if (quantityString == null || TextUtils.isEmpty(quantityString) ||(!quantityString.matches("[0-9]+")) ) {
+            Toast.makeText(this, getString(R.string.quantity_save_failed),
+                    Toast.LENGTH_SHORT).show();
+       //     finish();
+            startActivity(getIntent());
+        }
+
+        else {
+            // Create a ContentValues object where column names are the keys,
+            // and inventory attributes from the editor are the values.
+            ContentValues values = new ContentValues();
+            values.put(InventoryEntry.COLUMN_PRODUCT_NAME, nameString);
+            values.put(InventoryEntry.COLUMN_PRICE, priceString);
+            values.put(InventoryEntry.COLUMN_QUANTITY, quantityString);
+            values.put(InventoryEntry.COLUMN_SUPPLIER, suppliernameString);
+            values.put(InventoryEntry.COLUMN_PHONE, supplierphoneString);
+
+            // Determine if this is a new or existing inventory item by checking if mCurrentInventoryUri is null or not
+            if (mCurrentInventoryUri == null) {
+                // This is a NEW inventory item, so insert a new item into the provider,
+                // returning the content URI for the new item
+                Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
+
+                // Show a toast message depending on whether or not the insertion was successful.
+                if (newUri == null) {
+                    // If the new content URI is null, then there was an error with insertion.
+                    Toast.makeText(this, getString(R.string.editor_insert_inventory_failed),
+                            Toast.LENGTH_SHORT).show();
+
+                } else {
+                    // Otherwise, the insertion was successful and we can display a toast.
+
+                    Toast.makeText(this, getString(R.string.editor_insert_inventory_successful),
+                            Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                // Otherwise this is an EXISTING item, so update the item with content URI: mCurrentInventoryUri
+                // and pass in the new ContentValues. Pass in null for the selection and selection args
+                // because mCurrentInventoryUri will already identify the correct row in the database that
+                // we want to modify.
+                int rowsAffected = getContentResolver().update(mCurrentInventoryUri, values, null, null);
+
+                // Show a toast message depending on whether or not the update was successful.
+                if (rowsAffected == 0) {
+                    // If no rows were affected, then there was an error with the update.
+                    Toast.makeText(this, getString(R.string.editor_update_inventory_failed),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    // Otherwise, the update was successful and we can display a toast.
+                    Toast.makeText(this, getString(R.string.editor_update_inventory_successful),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+       }
     }
 
     @Override
@@ -440,7 +502,7 @@ public class EditorActivity extends AppCompatActivity implements
     private void showUnsavedChangesDialog(
             DialogInterface.OnClickListener discardButtonClickListener) {
         // Create an AlertDialog.Builder and set the message, and click listeners
-        // for the postivie and negative buttons on the dialog.
+        // for the positivie and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.unsaved_changes_dialog_msg);
         builder.setPositiveButton(R.string.discard, discardButtonClickListener);
@@ -514,5 +576,6 @@ public class EditorActivity extends AppCompatActivity implements
         // Close the activity
         finish();
     }
+
 
 }
