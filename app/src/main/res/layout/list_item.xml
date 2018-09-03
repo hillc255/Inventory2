@@ -4,31 +4,32 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/linearlayout"
-    android:paddingTop="30dp"
-    android:paddingLeft="30dp"
-    android:paddingRight="30dp">
+    android:paddingTop="@dimen/large"
+    android:paddingLeft="@dimen/large"
+    android:paddingRight="@dimen/large">
 
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
+        app:fontFamily="@string/sans_serif_medium"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="#000000" />
+        android:textColor="@color/colorBackground" />
 
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
+        app:fontFamily="@string/sans_serif_medium"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="#000000"
-        android:paddingTop="10dp"/>
+        android:textColor="@color/colorBackground"
+        android:paddingTop="@dimen/small"/>
 
     <LinearLayout
         android:id="@+id/container_measurement"
@@ -40,22 +41,23 @@
             android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
+            app:fontFamily="@string/sans_serif_medium"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="#000000"
-            android:paddingTop="10dp"
+            android:textColor="@color/colorBackground"
+            android:paddingTop="@dimen/small"
             android:layout_weight="1"
-            android:paddingRight="80dp"/>
+            android:paddingRight="@dimen/vvlarge"
+            android:paddingEnd="@dimen/vvlarge"/>
 
         <Button
             android:id="@+id/salebutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sale"
-            android:fontFamily="sans-serif"
+            android:text="@string/sale_btn"
+            app:fontFamily="@string/sans_serif"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#000000"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/colorBackground"
             android:focusable="false"
             android:focusableInTouchMode="false"/>
 

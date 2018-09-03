@@ -2,7 +2,6 @@
     <string name="app_name">Inventory</string>
 
     <!-- Menu strings -->
-
     <!-- Label for overflow menu option that inserts fake inventory data into the app -->
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
     <!-- Label for overflow menu option that deletes all inventory data in the app  -->
@@ -12,7 +11,6 @@
     <string name="action_delete">Delete</string>
 
     <!-- Dummy data for insert -->
-
     <!-- Dummy product name  -->
     <string name="dummy_name">Book of Happiness</string>
     <!-- Dummy price -->
@@ -36,7 +34,6 @@
     <string name="oldphone">Old fashioned desk phone</string>
 
     <!-- Edit activity strings -->
-
     <!-- Title for the activity to add a new item -->
     <string name="editor_activity_title_new_product">Add a Product</string>
     <!-- Title for the activity to edit an existing item  -->
@@ -44,7 +41,6 @@
     <!-- Label for editor menu option to save item and leave editor  -->
 
     <!-- Toast messages -->
-
     <!--  CatalogActivity Toasts -->
     <string name="quantity_change_inventory_failed">There are no products</string>
     <string name="quantity_change_inventory_success">Quantity reduced by 1</string>
@@ -64,7 +60,6 @@
     <string name="editor_update_inventory_failed">Error with updating inventory</string>
 
     <!-- Dialog messages -->
-
     <!-- Dialog message when user is leaving editor but hasn't saved changes  -->
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
     <!-- Dialog button text for the option to discard a user's changes  -->
@@ -78,13 +73,13 @@
     <!-- Dialog button text for the option to cancel deletion of the current inventory item -->
     <string name="cancel">Cancel</string>
 
-    <!-- Edit labels -->
-
     <!-- Label for overview category of attributes in the editor -->
     <string name="category_overview">Overview</string>
+    <string name="sale_btn">Sale</string>
+    <string name="sans_serif_medium">sans-serif-medium</string>
+    <string name="sans_serif">sans-serif</string>
 
     <!-- Hints -->
-
     <!-- Text hint for name field in the editor  -->
     <string name="product_info">Product Info</string>
     <string name="hint_name">Name</string>
@@ -95,9 +90,7 @@
     <string name="hint_supplier_phone">Supplier Phone</string>
     <string name="click_call">Click To Call</string>
 
-
     <!-- InventoryCursorAdapter labels for product, price, quantity values -->
-
     <!-- Cursor set text product -->
     <string name="text_product">Product:&#160;&#160;&#160;&#160;&#160;&#160;</string>
     <!-- Cursor set text price -->

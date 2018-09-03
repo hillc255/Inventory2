@@ -8,7 +8,6 @@
     <dimen name="activity_margin">16dp</dimen>
 
     <!-- Common dimension values used throughout the app -->
-    <dimen name="zero">0dp</dimen>
     <dimen name="vvsmall">4dp</dimen>
     <dimen name="verysmall">8dp</dimen>
     <dimen name="small">10dp</dimen>
