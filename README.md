@@ -12,6 +12,7 @@ There are screens to Add Items and Edit Inventory.  Dummy data can be added to s
 The database has the following fields:  _ID, Product Name, Price, Quantity, Supplier Name, Supplier Phone Numer
 
 
+</br>
 <p align="center">
  <kbd><img width="300" height="533" src="readme_assets/inventoryvideo.gif"></kbd>
 </p>
