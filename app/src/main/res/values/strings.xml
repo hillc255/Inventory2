@@ -27,7 +27,7 @@
     <string name="sub_title">Add Inventory</string>
     <string name="inventory_image">Shopping cart with boxes</string>
     <string name="dbname">SQLite</string>
-    <string name="table_desc"> Table name: Inventory</string>
+    <string name="table_desc"> TABLE_NAME:&#160;&#160;&#160;inventory</string>
     <string name="db_types">Description of database table types</string>
     <string name="reduce_quantity_btn">Decrease quantity button</string>
     <string name="increase_quantity_btn">Increase quantity button</string>
