@@ -27,7 +27,7 @@ A delete quantity by 1 button on the list screen and add/delete buttons on the e
 
 Below are 4 screen shots with the splash screen, insertion of dummy data, editing a product and adding a product.
 
-![Splash screen with db columns]<kdb><img width="150" height="266 src="readme_assets/dbscreen.png"></kdb> |
+![Splash screen with db columns](https://github.com/hillc255/Inventory2/blob/master/readme_assets/dbscreen.png)|
 ![Dummy data inserted.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/dummydata.png) |
 ![Edit a product.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/editproduct.png) |
 ![Add a product.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/addproduct.png)
