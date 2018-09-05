@@ -24,9 +24,9 @@ After the initial splash screen, which has an image of the db table columns, use
 
 The CatalogActivity is for the main splash screen.  The EditorActivity is for editing the new and existing products in the inventory.  The InventoryCursorAdapter is used to pull the list together from the database.  
 
-A delete quantity by 1 button on the list screen and add/delete buttons on the edit screen permit the user to adjust the quantity of items in the inventory. An item can be deleted from the inventory in the edit screen.
+A delete quantity by 1 sale button on the list screen and delete (-) / add (+) buttons on the edit screen permit the user to adjust the quantity of items in the inventory. An item can be deleted from the inventory in the edit screen using a floating button.
 
-Below are 4 screen shots with the splash screen, insertion of dummy data, editing a product and adding a product.</br>
+Below are 4 screenshots with the splash screen, insertion of dummy data, editing a product and adding a product displaying.</br>
 
 ![Splash screen with db columns](https://github.com/hillc255/Inventory2/blob/master/readme_assets/dbscreen.png)&nbsp;&nbsp;&nbsp;&nbsp;
 ![Dummy data inserted.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/dummydata.png)&nbsp;&nbsp;&nbsp;&nbsp; 
