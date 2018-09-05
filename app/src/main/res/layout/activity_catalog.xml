@@ -60,10 +60,10 @@
             android:layout_below="@+id/inventory_image"
             android:layout_centerHorizontal="true"
             app:fontFamily="sans-serif-medium"
-            android:paddingTop="@dimen/verysmall"
+            android:paddingTop="@dimen/mediumlg"
             android:text="@string/dbname"
             android:textColor="@color/colorBackground"
-            android:textAppearance="?android:textAppearanceMedium" />
+            android:textAppearance="?android:textAppearanceSmall" />
 
         <TextView
             android:id="@+id/empty_subtitle_text2"

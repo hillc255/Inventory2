@@ -11,6 +11,7 @@
      limitations under the License.
 -->
 <resources>
+
     <!-- The app branding color for the app bar -->
     <color name="colorPrimary">#000000</color>
 
