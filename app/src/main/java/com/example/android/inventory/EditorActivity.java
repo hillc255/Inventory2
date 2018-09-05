@@ -19,18 +19,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
-
-import org.w3c.dom.Text;
 
 /**
  * Allows user to create a new inventory item or edit an existing one.
@@ -80,6 +78,12 @@ public class EditorActivity extends AppCompatActivity implements
     };
 
     private static final int REQUEST_PHONE_CALL = 1;
+
+    //Global variables used with adding and subtracting edit quantity buttons
+    boolean bQuantityPlus = false;
+    boolean bQuantityMinus = false;
+    int newQuantityPlus;
+    int newQuantityMinus;
 
 
     @Override
@@ -133,6 +137,7 @@ public class EditorActivity extends AppCompatActivity implements
         mSuppliernameEditText.setOnTouchListener(mTouchListener);
         mSupplierphoneEditText.setOnTouchListener(mTouchListener);
 
+        //Button action to reduce quantity by 1
         ImageButton buttonDec = findViewById(R.id.minusButton);
         buttonDec.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,33 +145,39 @@ public class EditorActivity extends AppCompatActivity implements
 
                 String quantityString = mQuantityEditText.getText().toString().trim();
 
+                //Check if quantity is greater than zero to enable reduction
                 if ((Integer.valueOf(quantityString)) > 0) {
                     int quantity = (Integer.valueOf(quantityString)) - 1;
 
+                    //Save the decreased value of quantity in the EditText field
                     ContentValues values2 = new ContentValues();
-                    values2.put(InventoryEntry.COLUMN_QUANTITY, Integer.toString(quantity));
+                    String newStringQuantity = Integer.toString(quantity);
+                    mQuantityEditText.setText(newStringQuantity, TextView.BufferType.EDITABLE);
+                    values2.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
 
-                    int rowsAffected = getContentResolver().update(mCurrentInventoryUri, values2, null, null);
                 } else {
-
+                    //Quantity is zero and can not be reduced further so alert user with message
                     Toast.makeText(getApplicationContext(), getString(R.string.quantity_change_inventory_failed),
                             Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+        //Button action to increase quantity by 1
         ImageButton buttonInc = findViewById(R.id.plusButton);
         buttonInc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //Get existing quantity and increase it by 1
                 String quantityString = mQuantityEditText.getText().toString().trim();
                 int quantity = (Integer.valueOf(quantityString)) + 1;
 
+                //Save the increased value of quantity in EditText field
                 ContentValues values2 = new ContentValues();
-                values2.put(InventoryEntry.COLUMN_QUANTITY, Integer.toString(quantity));
-
-                int rowsAffected = getContentResolver().update(mCurrentInventoryUri, values2, null, null);
+                String newStringQuantity = Integer.toString(quantity);
+                mQuantityEditText.setText(newStringQuantity, TextView.BufferType.EDITABLE);
+                values2.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
             }
         });
 
@@ -221,7 +232,7 @@ public class EditorActivity extends AppCompatActivity implements
 
         // Check if this is supposed to be a new inventory item
         // and check if all the fields in the editor are blank
-        if (mCurrentInventoryUri == null && TextUtils.isEmpty(nameString)){
+        if (mCurrentInventoryUri == null && TextUtils.isEmpty(nameString)) {
             // Since name field was not added, we can return early without creating a new item.
             // No need to create ContentValues and no need to do any ContentProvider operations.
             Toast.makeText(this, getString(R.string.name_save_failed),
@@ -239,7 +250,7 @@ public class EditorActivity extends AppCompatActivity implements
 
 
         //Validation for existing Inventory item and empty name which must have value
-        if (mCurrentInventoryUri !=null && TextUtils.isEmpty(nameString)){
+        if (mCurrentInventoryUri != null && TextUtils.isEmpty(nameString)) {
             // Since name is empty prompt toast
             Toast.makeText(this, getString(R.string.name_save_failed),
                     Toast.LENGTH_SHORT).show();
@@ -247,7 +258,7 @@ public class EditorActivity extends AppCompatActivity implements
         }
 
         //Validate name entry for existing item - not null, any character 1-20
-        if (mCurrentInventoryUri !=null && nameString.length() > 20) {
+        if (mCurrentInventoryUri != null && nameString.length() > 20) {
             Toast.makeText(this, getString(R.string.name_save_failed),
                     Toast.LENGTH_SHORT).show();
             return;
@@ -255,27 +266,19 @@ public class EditorActivity extends AppCompatActivity implements
 
         //Set price to 0 if it is empty or only equal "."
         int priceZero = 0;
-        if (TextUtils.isEmpty(priceString)||priceString.matches("")||priceString.equals(".")){
-            priceString =  Integer.toString(priceZero);
+        if (TextUtils.isEmpty(priceString) || priceString.matches("") || priceString.equals(".")) {
+            priceString = Integer.toString(priceZero);
         }
 
         //Set quantity to 0 if it is empty
         int quantityZero = 0;
-        if (TextUtils.isEmpty(quantityString)||quantityString.matches("")){
-            quantityString =  Integer.toString(quantityZero);
+        if (TextUtils.isEmpty(quantityString) || quantityString.matches("")) {
+            quantityString = Integer.toString(quantityZero);
         }
 
-        //Validate quantity entry is not greater than 10000
-        int quantityInteger = Integer.parseInt(quantityString);
-        if (quantityInteger > 10000){
-            Toast.makeText(this, getString(R.string.quantity_save_failed),
-                    Toast.LENGTH_SHORT).show();
-            finish();
-            startActivity(getIntent());
-        }
 
         //Validate supplier name entry - any character 1-20
-        if (suppliernameString.length() > 20){
+        if (suppliernameString.length() > 20) {
             Toast.makeText(this, getString(R.string.suppliername_save_failed),
                     Toast.LENGTH_SHORT).show();
             finish();
@@ -288,9 +291,7 @@ public class EditorActivity extends AppCompatActivity implements
                     Toast.LENGTH_SHORT).show();
             finish();
             startActivity(getIntent());
-        }
-
-        else {
+        } else {
             // Create a ContentValues object where column names are the keys,
             // and inventory attributes from the editor are the values.
             ContentValues values = new ContentValues();
@@ -313,10 +314,7 @@ public class EditorActivity extends AppCompatActivity implements
                     // If the new content URI is null, then there was an error with insertion.
                     Toast.makeText(this, getString(R.string.editor_insert_inventory_failed),
                             Toast.LENGTH_SHORT).show();
-                }
-
-
-                else {
+                } else {
                     // Otherwise, the insertion was successful and we can display a toast.
 
                     Toast.makeText(this, getString(R.string.editor_insert_inventory_successful),
@@ -341,7 +339,7 @@ public class EditorActivity extends AppCompatActivity implements
                             Toast.LENGTH_SHORT).show();
                 }
             }
-       }
+        }
     }
 
     @Override

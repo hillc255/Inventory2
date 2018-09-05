@@ -101,7 +101,6 @@
     <!-- Checks for saving to inventory database -->
     <string name="name_save_failed">Product name must have 1 to 20 characters and not be empty</string>
     <string name="suppliername_save_failed">Product name must have less than 21 characters</string>
-    <string name="quantity_save_failed">Quantity should be less than 10000 and a positive integer or 0</string>
     <string name="phone_save_failed">Phone must be 11 numbers (example: 18882804331) beginning with country code</string>
 
 </resources>
