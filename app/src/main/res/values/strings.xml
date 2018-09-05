@@ -14,7 +14,7 @@
     <!-- Dummy product name  -->
     <string name="dummy_name">Book of Happiness</string>
     <!-- Dummy price -->
-    <string name="dummy_price">10</string>
+    <string name="dummy_price">10.25</string>
     <!-- Dummy quantity -->
     <string name="dummy_quantity">5</string>
     <!-- Dummy supplier name -->
@@ -99,12 +99,9 @@
     <string name="text_quantity">Quantity:&#160;&#160;&#160;&#160;&#160;&#160;</string>
 
     <!-- Checks for saving to inventory database -->
-    <string name="name_save_failed">Product name must have 1 to 20 characters</string>
-    <string name="suppliername_save_failed">Product name must have 1 to 20 characters</string>
-    <string name="price_save_failed_null">Price must have a value</string>
-    <string name="price_save_failed_double">Price must be in this format: 100.00</string>
-    <string name="price_save_failed_toohigh">Price must be less than $10000</string>
-    <string name="quantity_save_failed">Quantity must be a positive integer or at least 0</string>
-
+    <string name="name_save_failed">Product name must have 1 to 20 characters and not be empty</string>
+    <string name="suppliername_save_failed">Product name must have less than 21 characters</string>
+    <string name="quantity_save_failed">Quantity should be less than 10000 and a positive integer or 0</string>
+    <string name="phone_save_failed">Phone must be 11 numbers (example: 18882804331) beginning with country code</string>
 
 </resources>

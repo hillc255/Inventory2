@@ -81,7 +81,6 @@ public class EditorActivity extends AppCompatActivity implements
 
     private static final int REQUEST_PHONE_CALL = 1;
 
-    Double doublePrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,68 +218,75 @@ public class EditorActivity extends AppCompatActivity implements
         String suppliernameString = mSuppliernameEditText.getText().toString().trim();
         String supplierphoneString = mSupplierphoneEditText.getText().toString().trim();
 
+
         // Check if this is supposed to be a new inventory item
         // and check if all the fields in the editor are blank
-        if (mCurrentInventoryUri == null &&
-                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(nameString)) {
-            // Since no fields were modified, we can return early without creating a new item.
+        if (mCurrentInventoryUri == null && TextUtils.isEmpty(nameString)){
+            // Since name field was not added, we can return early without creating a new item.
             // No need to create ContentValues and no need to do any ContentProvider operations.
+            Toast.makeText(this, getString(R.string.name_save_failed),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (mCurrentInventoryUri == null && nameString.length() > 20) {
+            // Since name field greater than 20 character, we can return early without creating a new item.
+            // No need to create ContentValues and no need to do any ContentProvider operations.
+            Toast.makeText(this, getString(R.string.name_save_failed),
+                    Toast.LENGTH_SHORT).show();
             return;
         }
 
 
-        //Validate name entry - not null, any character 1-20
-        if (nameString == null || TextUtils.isEmpty(nameString) || nameString.length() < 1 || nameString.length() > 20) {
-
+        //Validation for existing Inventory item and empty name which must have value
+        if (mCurrentInventoryUri !=null && TextUtils.isEmpty(nameString)){
+            // Since name is empty prompt toast
             Toast.makeText(this, getString(R.string.name_save_failed),
                     Toast.LENGTH_SHORT).show();
-
-           // finish();
-            startActivity(getIntent());
+            return;
         }
 
-        //Validate supplier name entry - not null, any character 1-20
-        if (suppliernameString == null || TextUtils.isEmpty(suppliernameString) || suppliernameString.length() < 1 || suppliernameString.length() > 20) {
-
-            Toast.makeText(this, getString(R.string.suppliername_save_failed),
+        //Validate name entry for existing item - not null, any character 1-20
+        if (mCurrentInventoryUri !=null && nameString.length() > 20) {
+            Toast.makeText(this, getString(R.string.name_save_failed),
                     Toast.LENGTH_SHORT).show();
-
-          //  finish();
-            startActivity(getIntent());
-        }
-        //validate price is not null
-        if (TextUtils.isEmpty(priceString)) {
-
-            Toast.makeText(this, getString(R.string.price_save_failed_null),
-                    Toast.LENGTH_SHORT).show();
-         //   finish();
-            startActivity(getIntent());
+            return;
         }
 
-//        //Validate price is a double less than 10000
-//        if (!TextUtils.isEmpty(priceString)) {
-//            //validate input is a double
-//            try {
-//                doublePrice = Double.parseDouble(priceString);
-//            } catch (NumberFormatException e) {
-//                Toast.makeText(this, getString(R.string.price_save_failed_double),
-//                        Toast.LENGTH_SHORT).show();
-//                finish();
-//                startActivity(getIntent());
-//            }
-//            if (doublePrice > 10000 ){
-//                Toast.makeText(this, getString(R.string.price_save_failed_toohigh),
-//                        Toast.LENGTH_SHORT).show();
-//                finish();
-//                startActivity(getIntent());
-//            }
-//        }
+        //Set price to 0 if it is empty or only equal "."
+        int priceZero = 0;
+        if (TextUtils.isEmpty(priceString)||priceString.matches("")||priceString.equals(".")){
+            priceString =  Integer.toString(priceZero);
+        }
 
-        //Validate quantity entry - not null nor empty, and an integer
-        if (quantityString == null || TextUtils.isEmpty(quantityString) ||(!quantityString.matches("[0-9]+")) ) {
+        //Set quantity to 0 if it is empty
+        int quantityZero = 0;
+        if (TextUtils.isEmpty(quantityString)||quantityString.matches("")){
+            quantityString =  Integer.toString(quantityZero);
+        }
+
+        //Validate quantity entry is not greater than 10000
+        int quantityInteger = Integer.parseInt(quantityString);
+        if (quantityInteger > 10000){
             Toast.makeText(this, getString(R.string.quantity_save_failed),
                     Toast.LENGTH_SHORT).show();
-       //     finish();
+            finish();
+            startActivity(getIntent());
+        }
+
+        //Validate supplier name entry - any character 1-20
+        if (suppliernameString.length() > 20){
+            Toast.makeText(this, getString(R.string.suppliername_save_failed),
+                    Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(getIntent());
+        }
+
+        //Validate phone entry can be null but if not empty must have 11 numbers
+        if (!TextUtils.isEmpty(supplierphoneString) && (supplierphoneString.length() != 11)) {
+            Toast.makeText(this, getString(R.string.phone_save_failed),
+                    Toast.LENGTH_SHORT).show();
+            finish();
             startActivity(getIntent());
         }
 
@@ -289,6 +295,7 @@ public class EditorActivity extends AppCompatActivity implements
             // and inventory attributes from the editor are the values.
             ContentValues values = new ContentValues();
             values.put(InventoryEntry.COLUMN_PRODUCT_NAME, nameString);
+
             values.put(InventoryEntry.COLUMN_PRICE, priceString);
             values.put(InventoryEntry.COLUMN_QUANTITY, quantityString);
             values.put(InventoryEntry.COLUMN_SUPPLIER, suppliernameString);
@@ -298,6 +305,7 @@ public class EditorActivity extends AppCompatActivity implements
             if (mCurrentInventoryUri == null) {
                 // This is a NEW inventory item, so insert a new item into the provider,
                 // returning the content URI for the new item
+
                 Uri newUri = getContentResolver().insert(InventoryEntry.CONTENT_URI, values);
 
                 // Show a toast message depending on whether or not the insertion was successful.
@@ -305,14 +313,17 @@ public class EditorActivity extends AppCompatActivity implements
                     // If the new content URI is null, then there was an error with insertion.
                     Toast.makeText(this, getString(R.string.editor_insert_inventory_failed),
                             Toast.LENGTH_SHORT).show();
+                }
 
-                } else {
+
+                else {
                     // Otherwise, the insertion was successful and we can display a toast.
 
                     Toast.makeText(this, getString(R.string.editor_insert_inventory_successful),
                             Toast.LENGTH_SHORT).show();
                 }
             } else {
+
                 // Otherwise this is an EXISTING item, so update the item with content URI: mCurrentInventoryUri
                 // and pass in the new ContentValues. Pass in null for the selection and selection args
                 // because mCurrentInventoryUri will already identify the correct row in the database that

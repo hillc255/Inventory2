@@ -20,7 +20,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
     /**
      * Name of the database file
      */
-    private static final String DATABASE_NAME = "inventory13.db";
+    private static final String DATABASE_NAME = "inventory3.db";
 
     /**
      * Database version. If you change the database schema, you must increment the database version.
@@ -45,10 +45,10 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
         String SQL_CREATE_INVENTORY_TABLE = "CREATE TABLE " + InventoryEntry.TABLE_NAME + " ("
                 + InventoryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + InventoryEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
-                + InventoryEntry.COLUMN_PRICE + " INTEGER NOT NULL, "
-                + InventoryEntry.COLUMN_QUANTITY + " INTEGER NOT NULL, "
-                + InventoryEntry.COLUMN_SUPPLIER + " TEXT NOT NULL, "
-                + InventoryEntry.COLUMN_PHONE + " TEXT NOT NULL);";
+                + InventoryEntry.COLUMN_PRICE + " INTEGER, "
+                + InventoryEntry.COLUMN_QUANTITY + " INTEGER, "
+                + InventoryEntry.COLUMN_SUPPLIER + " TEXT, "
+                + InventoryEntry.COLUMN_PHONE + " INTEGER);";
 
         // Execute the SQL statement
         db.execSQL(SQL_CREATE_INVENTORY_TABLE);

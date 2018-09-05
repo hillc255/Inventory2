@@ -46,7 +46,7 @@
                 android:drawableLeft="@drawable/price"
                 android:drawableStart="@drawable/price"
                 android:hint="@string/hint_price"
-                android:inputType="textCapWords" />
+                android:inputType="numberDecimal" />
 
             <RelativeLayout
                 android:id="@+id/absoluteLayout1"
@@ -74,7 +74,7 @@
                     android:layout_toRightOf="@+id/minusButton"
                     android:gravity="center"
                     android:hint="@string/hint_quantity"
-                    android:inputType="textCapWords" />
+                    android:inputType="number" />
 
                 <!-- Quantity plus button field -->
 
@@ -131,7 +131,7 @@
                 style="@style/EditorFieldStyle"
                 android:layout_below="@+id/edit_suppliername"
                 android:hint="@string/hint_supplier_phone"
-                android:inputType="text" />
+                android:inputType="number" />
 
 
             <ImageButton
