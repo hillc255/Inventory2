@@ -13,7 +13,7 @@ The database has the following fields:  _ID, Product Name, Price, Quantity, Supp
 
 
 <p align="center">
- <kbd><img width="300" height="533" src="readme_assets/inventory_video.gif"></kbd>
+ <kbd><img width="300" height="533" src="readme_assets/inventoryvideo.gif"></kbd>
 </p>
 
 ## Code Description
