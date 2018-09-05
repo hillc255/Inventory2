@@ -24,10 +24,10 @@ The CatalogActivity is for the main splash screen.  The EditorActivity is for ed
 
 Below are 4 screen shots with the splash screen, insertion of dummy data, editing a product and adding a product.
 
-![Splash screen with database columns.](readme_assets/1db_screen.png) |
-![Screen of dummy data inserted.](readme_assets/2dummy_data.png) |
-![Screen of editing a product.](readme_assets/3edit_product.png) |
-![Screen of adding a product.](readme/4add_product.png)
+![Splash screen with database columns.](https://github.com/hillc255/Inventory2/tree/master/readme_assets/1db_screen.png) |
+![Screen of dummy data inserted.](https://github.com/hillc255/Inventory2/tree/master/readme_assets/2dummy_data.png) |
+![Screen of editing a product.](https://github.com/hillc255/Inventory2/tree/master/readme_assetss/3edit_product.png) |
+![Screen of adding a product.](https://github.com/hillc255/Inventory2/tree/master/readme_assets4add_product.png)
 
 ## Motivation
 
