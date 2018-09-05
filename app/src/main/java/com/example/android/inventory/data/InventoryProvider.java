@@ -5,17 +5,13 @@ package com.example.android.inventory.data;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.android.inventory.R;
 import com.example.android.inventory.data.InventoryContract.InventoryEntry;
 
 
@@ -145,7 +141,7 @@ public class InventoryProvider extends ContentProvider {
     private Uri insertInventory(Uri uri, ContentValues values) {
         // Check that the name is not null and between 1-20 characters
         String name = values.getAsString(InventoryEntry.COLUMN_PRODUCT_NAME);
-        if (name == null|| (name.length() < 1 || name.length() > 20)) {
+        if (name == null || (name.length() < 1 || name.length() > 20)) {
 
             throw new IllegalArgumentException("Inventory requires a valid name");
         }

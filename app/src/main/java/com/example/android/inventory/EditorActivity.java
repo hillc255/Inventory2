@@ -19,7 +19,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -65,7 +64,6 @@ public class EditorActivity extends AppCompatActivity implements
      */
     private boolean mInventoryHasChanged = false;
 
-
     /**
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
      * the view, and we change the mInventoryHasChanged boolean to true.
@@ -85,7 +83,6 @@ public class EditorActivity extends AppCompatActivity implements
     boolean bQuantityMinus = false;
     int newQuantityPlus;
     int newQuantityMinus;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +144,7 @@ public class EditorActivity extends AppCompatActivity implements
                 //Check if this is an existing item record
                 if (mCurrentInventoryUri != null) {
 
-                   //This is an existing record so get the current quantity in EditText
+                    //This is an existing record so get the current quantity in EditText
                     String quantityString = mQuantityEditText.getText().toString().trim();
 
                     //Check if quantity is greater than zero to enable reduction
@@ -168,10 +165,10 @@ public class EditorActivity extends AppCompatActivity implements
 
                 }
                 //This is a new item record
-                else{
+                else {
 
                     //Since there is no value in quantity and we pressed the decrease button, put 0 in EditText
-                    if (bQuantityMinus == false) {
+                    if (!bQuantityMinus) {
                         mQuantityEditText.setText("0", TextView.BufferType.EDITABLE);
 
                         //Reset boolean so we know there is an initial value in quantity
@@ -186,31 +183,23 @@ public class EditorActivity extends AppCompatActivity implements
                                 Toast.LENGTH_SHORT).show();
 
                     } else {
-                         //There is a value in quantity
+                        //There is a value in quantity
                         String quantityString = mQuantityEditText.getText().toString().trim();
                         newQuantityMinus = Integer.valueOf(quantityString);
 
-                          //Check whether quantity in EditText is O and if so, alert users there is no quantity
-                          if (newQuantityMinus == 0){
-                                Toast.makeText(getApplicationContext(), getString(R.string.quantity_change_inventory_failed),
+                        //Check whether quantity in EditText is O and if so, alert users there is no quantity
+                        if (newQuantityMinus == 0) {
+                            Toast.makeText(getApplicationContext(), getString(R.string.quantity_change_inventory_failed),
                                     Toast.LENGTH_SHORT).show();
-                          }
-                          else {
-                              //Decrease quantity in new product using the variable and put it in EditText
-                              newQuantityMinus = newQuantityMinus - 1;
-                              ContentValues values = new ContentValues();
-                              String newStringQuantity = Integer.toString(newQuantityMinus);
-                              mQuantityEditText.setText(newStringQuantity, TextView.BufferType.EDITABLE);
-                              values.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
-                          }
+                        } else {
+                            //Decrease quantity in new product using the variable and put it in EditText
+                            newQuantityMinus = newQuantityMinus - 1;
+                            ContentValues values = new ContentValues();
+                            String newStringQuantity = Integer.toString(newQuantityMinus);
+                            mQuantityEditText.setText(newStringQuantity, TextView.BufferType.EDITABLE);
+                            values.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
+                        }
                     }
-
-
-
-
-
-
-
 
                 }
             }
@@ -236,31 +225,31 @@ public class EditorActivity extends AppCompatActivity implements
                     values2.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
                 }
                 //This is a new item record
-                else{
-                        //Since there is no value in quantity and we pressed the increase button, put 1 in EditText
-                        if (bQuantityPlus == false) {
-                            mQuantityEditText.setText("1", TextView.BufferType.EDITABLE);
+                else {
+                    //Since there is no value in quantity and we pressed the increase button, put 1 in EditText
+                    if (!bQuantityPlus) {
+                        mQuantityEditText.setText("1", TextView.BufferType.EDITABLE);
 
-                            //Reset boolean so we know there is an initial value in quantity
-                            bQuantityPlus = true;
+                        //Reset boolean so we know there is an initial value in quantity
+                        bQuantityPlus = true;
 
-                            //Read value of quantity in EditText and save it to variable newQuantityPlus
-                            String quantityString = mQuantityEditText.getText().toString().trim();
-                            newQuantityPlus = Integer.valueOf(quantityString);
-                        } else {
+                        //Read value of quantity in EditText and save it to variable newQuantityPlus
+                        String quantityString = mQuantityEditText.getText().toString().trim();
+                        newQuantityPlus = Integer.valueOf(quantityString);
+                    } else {
 
-                            //Increase quantity in new product using the variable and put it in EditText
-                            newQuantityPlus = newQuantityPlus + 1;
-                            ContentValues values = new ContentValues();
-                            String newStringQuantity = Integer.toString(newQuantityPlus);
-                            mQuantityEditText.setText(newStringQuantity, TextView.BufferType.EDITABLE);
-                            values.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
-                        }
+                        //Increase quantity in new product using the variable and put it in EditText
+                        newQuantityPlus = newQuantityPlus + 1;
+                        ContentValues values = new ContentValues();
+                        String newStringQuantity = Integer.toString(newQuantityPlus);
+                        mQuantityEditText.setText(newStringQuantity, TextView.BufferType.EDITABLE);
+                        values.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
+                    }
                 }
             }
         });
 
-
+        //Floating button to delete single record
         FloatingActionButton buttonItemDelete = findViewById(R.id.deleteButton);
         buttonItemDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -271,6 +260,7 @@ public class EditorActivity extends AppCompatActivity implements
             }
         });
 
+        //Call supplier using phone ImageButton
         ImageButton phoneButton = findViewById(R.id.phoneButton);
         phoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -664,6 +654,5 @@ public class EditorActivity extends AppCompatActivity implements
         // Close the activity
         finish();
     }
-
 
 }

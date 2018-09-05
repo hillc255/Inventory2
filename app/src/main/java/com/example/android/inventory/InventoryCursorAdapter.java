@@ -110,7 +110,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
             this.position = position;
         }
 
-
+        //Get the quantity from the database
         @Override
         public void onClick(View view) {
 
