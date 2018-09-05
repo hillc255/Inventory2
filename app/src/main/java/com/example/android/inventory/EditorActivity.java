@@ -19,6 +19,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -143,22 +144,74 @@ public class EditorActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
 
-                String quantityString = mQuantityEditText.getText().toString().trim();
+                //Check if this is an existing item record
+                if (mCurrentInventoryUri != null) {
 
-                //Check if quantity is greater than zero to enable reduction
-                if ((Integer.valueOf(quantityString)) > 0) {
-                    int quantity = (Integer.valueOf(quantityString)) - 1;
+                   //This is an existing record so get the current quantity in EditText
+                    String quantityString = mQuantityEditText.getText().toString().trim();
 
-                    //Save the decreased value of quantity in the EditText field
-                    ContentValues values2 = new ContentValues();
-                    String newStringQuantity = Integer.toString(quantity);
-                    mQuantityEditText.setText(newStringQuantity, TextView.BufferType.EDITABLE);
-                    values2.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
+                    //Check if quantity is greater than zero to enable reduction
+                    if ((Integer.valueOf(quantityString)) > 0) {
+                        int quantity = (Integer.valueOf(quantityString)) - 1;
 
-                } else {
-                    //Quantity is zero and can not be reduced further so alert user with message
-                    Toast.makeText(getApplicationContext(), getString(R.string.quantity_change_inventory_failed),
-                            Toast.LENGTH_SHORT).show();
+                        //Save the decreased value of quantity in the EditText field
+                        ContentValues values2 = new ContentValues();
+                        String newStringQuantity = Integer.toString(quantity);
+                        mQuantityEditText.setText(newStringQuantity, TextView.BufferType.EDITABLE);
+                        values2.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
+
+                    } else {
+                        //Quantity is zero and can not be reduced further so alert user with message
+                        Toast.makeText(getApplicationContext(), getString(R.string.quantity_change_inventory_failed),
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+                //This is a new item record
+                else{
+
+                    //Since there is no value in quantity and we pressed the decrease button, put 0 in EditText
+                    if (bQuantityMinus == false) {
+                        mQuantityEditText.setText("0", TextView.BufferType.EDITABLE);
+
+                        //Reset boolean so we know there is an initial value in quantity
+                        bQuantityMinus = true;
+
+                        //Read value of quantity in EditText and save it to variable newQuantityPlus
+                        String quantityString = mQuantityEditText.getText().toString().trim();
+                        newQuantityMinus = Integer.valueOf(quantityString);
+
+                        //Alert users there are no items
+                        Toast.makeText(getApplicationContext(), getString(R.string.quantity_change_inventory_failed),
+                                Toast.LENGTH_SHORT).show();
+
+                    } else {
+                         //There is a value in quantity
+                        String quantityString = mQuantityEditText.getText().toString().trim();
+                        newQuantityMinus = Integer.valueOf(quantityString);
+
+                          //Check whether quantity in EditText is O and if so, alert users there is no quantity
+                          if (newQuantityMinus == 0){
+                                Toast.makeText(getApplicationContext(), getString(R.string.quantity_change_inventory_failed),
+                                    Toast.LENGTH_SHORT).show();
+                          }
+                          else {
+                              //Decrease quantity in new product using the variable and put it in EditText
+                              newQuantityMinus = newQuantityMinus - 1;
+                              ContentValues values = new ContentValues();
+                              String newStringQuantity = Integer.toString(newQuantityMinus);
+                              mQuantityEditText.setText(newStringQuantity, TextView.BufferType.EDITABLE);
+                              values.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
+                          }
+                    }
+
+
+
+
+
+
+
+
                 }
             }
         });
@@ -169,15 +222,41 @@ public class EditorActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
 
-                //Get existing quantity and increase it by 1
-                String quantityString = mQuantityEditText.getText().toString().trim();
-                int quantity = (Integer.valueOf(quantityString)) + 1;
+                //Check if this is an existing item record
+                if (mCurrentInventoryUri != null) {
 
-                //Save the increased value of quantity in EditText field
-                ContentValues values2 = new ContentValues();
-                String newStringQuantity = Integer.toString(quantity);
-                mQuantityEditText.setText(newStringQuantity, TextView.BufferType.EDITABLE);
-                values2.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
+                    //Get existing quantity and increase it by 1
+                    String quantityString = mQuantityEditText.getText().toString().trim();
+                    int quantity = (Integer.valueOf(quantityString)) + 1;
+
+                    //Save the increased value of quantity in EditText field
+                    ContentValues values2 = new ContentValues();
+                    String newStringQuantity = Integer.toString(quantity);
+                    mQuantityEditText.setText(newStringQuantity, TextView.BufferType.EDITABLE);
+                    values2.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
+                }
+                //This is a new item record
+                else{
+                        //Since there is no value in quantity and we pressed the increase button, put 1 in EditText
+                        if (bQuantityPlus == false) {
+                            mQuantityEditText.setText("1", TextView.BufferType.EDITABLE);
+
+                            //Reset boolean so we know there is an initial value in quantity
+                            bQuantityPlus = true;
+
+                            //Read value of quantity in EditText and save it to variable newQuantityPlus
+                            String quantityString = mQuantityEditText.getText().toString().trim();
+                            newQuantityPlus = Integer.valueOf(quantityString);
+                        } else {
+
+                            //Increase quantity in new product using the variable and put it in EditText
+                            newQuantityPlus = newQuantityPlus + 1;
+                            ContentValues values = new ContentValues();
+                            String newStringQuantity = Integer.toString(newQuantityPlus);
+                            mQuantityEditText.setText(newStringQuantity, TextView.BufferType.EDITABLE);
+                            values.put(InventoryEntry.COLUMN_QUANTITY, newStringQuantity);
+                        }
+                }
             }
         });
 
