@@ -21,7 +21,7 @@ The database has the following fields:  _ID, Product Name, Price, Quantity, Supp
 
 After the initial splash screen, which had an image of the table columns, user can either add a new item with the floating button or insert dummy data.  There are two Activites:  CatalogActivity and EditoryActivity along with an InventoryCursorAdapter.
 
-The CatalogActivity is for the main splash screen.  The EditorActivity is for editing the new and existing products in the inventory.  The InventoryCursorAdapter is used to pull the list together from the database.
+The CatalogActivity is for the main splash screen.  The EditorActivity is for editing the new and existing products in the inventory.  The InventoryCursorAdapter is used to pull the list together from the database.  A delete quantity by 1 button on the list screen and add/delete buttons on the edit screen permit the user to adjust the quantity of items in the inventory. </br>
 
 Below are 4 screen shots with the splash screen, insertion of dummy data, editing a product and adding a product.
 
@@ -32,7 +32,7 @@ Below are 4 screen shots with the splash screen, insertion of dummy data, editin
 
 ## Motivation
 
-Application was assigned as the final project for the "Grow with Google - Udacity Nanodegree Android Basics."
+Application was assigned as the final project for the "Grow with Google - Udacity Nanodegree Android Basics" program.
 
 ## Installation
 
