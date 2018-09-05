@@ -28,10 +28,10 @@ A delete quantity by 1 button on the list screen and add/delete buttons on the e
 
 Below are 4 screen shots with the splash screen, insertion of dummy data, editing a product and adding a product.
 
-![Splash screen with db columns](https://github.com/hillc255/Inventory2/blob/master/readme_assets/dbscreen.png)&nbsp;&nbsp;&nbsp;&nbsp;
-![Dummy data inserted.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/dummydata.png)&nbsp;&nbsp;&nbsp;&nbsp; 
-![Edit a product.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/editproduct.png)&nbsp;&nbsp;&nbsp;&nbsp; 
-![Add a product.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/addproduct.png)&nbsp;&nbsp;&nbsp;&nbsp;
+![Splash screen with db columns](https://github.com/hillc255/Inventory2/blob/master/readme_assets/dbscreen.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![Dummy data inserted.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/dummydata.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+![Edit a product.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/editproduct.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+![Add a product.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/addproduct.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 ## Motivation
 
