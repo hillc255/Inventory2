@@ -32,7 +32,7 @@ Below are 4 screen shots with the splash screen, insertion of dummy data, editin
 
 ## Motivation
 
-Application was assigned as the final project for the "Grow with Google Scholarship: Android Basics" course in Udacity's Nanodegree program.
+Application was assigned as the final project for the "Grow with Google - Udacity Nanodegree Android Basics."
 
 ## Installation
 
@@ -51,5 +51,4 @@ Claudia Hill designed and developed this project.
 
 ## License
 
-Only to be used for educational purposes.
-Pew Research Center retains all copyrights for questions, answers and some images.
+Only to be used for educational purposes
