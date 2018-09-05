@@ -3,7 +3,7 @@ Android Studio project: Create an Inventory app using an SQLite Database - Grow 
 
 ## Synopsis
 
-Name:  Inventory
+Name:  Inventory2
 
 This is an Inventory application using an SQLite Database to store the list of items.  
 
