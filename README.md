@@ -12,7 +12,7 @@ This is an Inventory application using an SQLite Database to store a list of ite
 
 There are screens to Add Items and Edit Inventory.  Dummy data can be added to speed the process of adding items.
 
-The database has the following fields:  _ID, Product Name, Price, Quantity, Supplier Name, Supplier Phone Numer
+The database has the following fields:  _ID, Product Name, Price, Quantity, Supplier Name, Supplier Phone Number
 
 
 </br>
