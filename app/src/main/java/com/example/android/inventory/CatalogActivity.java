@@ -178,7 +178,6 @@ public class CatalogActivity extends AppCompatActivity implements
     public void decreaseCount(int columnId, int quantity) {
 
         if (quantity < 1) {
-            //  quantity = quantity - 1;
             Toast.makeText(this, getString(R.string.quantity_change_inventory_failed),
                     Toast.LENGTH_SHORT).show();
         } else {
