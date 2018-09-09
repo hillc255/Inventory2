@@ -2,10 +2,7 @@
 Android Studio project: </br>
 Create an Inventory app using an SQLite Database - Grow with Google - Udacity Nanodegree Scholarship 2018 
 
-</br>
-<p align="center">
- <kbd><img width="100" height="100" src="readme_assets/inventory_icon.png"></kbd>
-</p>
+ <kbd><img width="50" height="50" src="readme_assets/inventory_icon.png"></kbd>
 
 ## Synopsis
 
