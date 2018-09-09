@@ -4,9 +4,14 @@ Create an Inventory app using an SQLite Database - Grow with Google - Udacity Na
 
 ## Synopsis
 
-Name:  Inventory2
+Name:  Inventory
 
 This is an Inventory application using an SQLite Database to store a list of items.  
+
+</br>
+<p align="center">
+ <kbd><img width="100" height="178" src="readme_assets/inventory_icon.png"></kbd>
+</p>
 
 There are screens to Add Items and Edit Inventory.  Dummy data can be added to speed the process of adding items.
 
