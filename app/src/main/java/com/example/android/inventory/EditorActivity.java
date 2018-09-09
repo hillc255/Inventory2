@@ -3,7 +3,6 @@ package com.example.android.inventory;
 // Based on Udacity's Pets program: https://github.com/udacity/ud845-Pets
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -306,7 +305,7 @@ public class EditorActivity extends AppCompatActivity implements
                 TextUtils.isEmpty(priceString) &&
                 TextUtils.isEmpty(quantityString) &&
                 TextUtils.isEmpty(suppliernameString) &&
-                TextUtils.isEmpty(supplierphoneString) )) {
+                TextUtils.isEmpty(supplierphoneString))) {
             // No data added to any new field so
             // No need to create ContentValues and no need to do any ContentProvider operations.
             Toast.makeText(this, getString(R.string.nochanges_save_failed),
@@ -333,7 +332,7 @@ public class EditorActivity extends AppCompatActivity implements
 
 
         //Validation for existing Inventory item and values must be not null
-        if (mCurrentInventoryUri != null && (TextUtils.isEmpty(nameString)||
+        if (mCurrentInventoryUri != null && (TextUtils.isEmpty(nameString) ||
                 TextUtils.isEmpty(priceString) ||
                 TextUtils.isEmpty(quantityString) ||
                 TextUtils.isEmpty(suppliernameString) ||
