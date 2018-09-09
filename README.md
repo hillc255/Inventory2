@@ -1,17 +1,17 @@
 # Inventory2
 Android Studio project: </br>
-Create an Inventory app using an SQLite Database - Grow with Google - Udacity Nanodegree Scholarship 2018
+Create an Inventory app using an SQLite Database - Grow with Google - Udacity Nanodegree Scholarship 2018 
+
+</br>
+<p align="center">
+ <kbd><img width="100" height="100" src="readme_assets/inventory_icon.png"></kbd>
+</p>
 
 ## Synopsis
 
 Name:  Inventory
 
 This is an Inventory application using an SQLite Database to store a list of items.  
-
-</br>
-<p align="center">
- <kbd><img width="100" height="178" src="readme_assets/inventory_icon.png"></kbd>
-</p>
 
 There are screens to Add Items and Edit Inventory.  Dummy data can be added to speed the process of adding items.
 
