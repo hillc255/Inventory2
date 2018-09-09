@@ -20,16 +20,16 @@ The database has the following fields:  _ID, Product Name, Price, Quantity, Supp
 
 ## Code Description
 
-After the initial splash screen, which has an image of the db table columns, user can either add a new item with the floating button or insert dummy data.  Then, the data can be edited.  There are two Activites:  CatalogActivity and EditoryActivity along with an InventoryCursorAdapter.
+After the initial splash screen, which has an image of the db table columns, user can either add a new item with the floating button or insert data.  Then, the data can be edited.  There are two Activites:  CatalogActivity and EditoryActivity along with an InventoryCursorAdapter.
 
 The CatalogActivity is for the main splash screen.  The EditorActivity is for editing the new and existing products in the inventory.  The InventoryCursorAdapter is used to pull the list together from the database.  
 
 A delete quantity by 1 sale button on the list screen and delete (-) / add (+) buttons on the edit screen permit the user to adjust the quantity of items in the inventory. An item can be deleted from the inventory in the edit screen using a floating button.
 
-Below are 4 screenshots with the splash screen, insertion of dummy data, editing a product and adding a product displaying.
+Below are 4 screenshots with the splash screen, insertion of data, editing a product and adding a product displaying.
 
 ![Splash screen with db columns](https://github.com/hillc255/Inventory2/blob/master/readme_assets/dbscreen.png)&nbsp;&nbsp;&nbsp;&nbsp;
-![Dummy data inserted.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/dummydata.png)&nbsp;&nbsp;&nbsp;&nbsp; 
+![Data inserted.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/dummydata.png)&nbsp;&nbsp;&nbsp;&nbsp; 
 ![Edit a product.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/editproduct.png)&nbsp;&nbsp;&nbsp;&nbsp;
 ![Add a product.](https://github.com/hillc255/Inventory2/blob/master/readme_assets/addproduct.png)&nbsp;&nbsp;&nbsp;&nbsp;
 
