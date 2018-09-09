@@ -37,7 +37,8 @@
                 android:id="@+id/edit_name"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/hint_name"
-                android:inputType="textCapWords" />
+                android:inputType="textCapWords"
+                android:maxLength="20"/>
 
             <!-- Price field -->
             <EditText
@@ -123,7 +124,8 @@
                 android:id="@+id/edit_suppliername"
                 style="@style/EditorFieldStyle"
                 android:hint="@string/hint_supplier_name"
-                android:inputType="textCapWords" />
+                android:inputType="textCapWords"
+                android:maxLength="20"/>
 
             <!-- Supplier field -->
             <EditText
@@ -131,7 +133,8 @@
                 style="@style/EditorFieldStyle"
                 android:layout_below="@+id/edit_suppliername"
                 android:hint="@string/hint_supplier_phone"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="11"/>
 
 
             <ImageButton

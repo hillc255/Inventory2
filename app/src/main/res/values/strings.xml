@@ -99,8 +99,9 @@
     <string name="text_quantity">Quantity:&#160;&#160;&#160;&#160;&#160;&#160;</string>
 
     <!-- Checks for saving to inventory database -->
-    <string name="name_save_failed">Product name must have 1 to 20 characters and not be empty</string>
-    <string name="suppliername_save_failed">Product name must have less than 21 characters</string>
+    <string name="nochanges_save_failed">Not saved: No input data</string>
+    <string name="null_save_failed">Not saved: No null values</string>
+    <string name="editnull_save_failed">Not edited: No null values</string>
     <string name="phone_save_failed">Phone must be 11 numbers (example: 18882804331) beginning with country code</string>
 
 </resources>

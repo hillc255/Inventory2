@@ -3,6 +3,7 @@ package com.example.android.inventory;
 // Based on Udacity's Pets program: https://github.com/udacity/ud845-Pets
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -299,37 +300,49 @@ public class EditorActivity extends AppCompatActivity implements
         String supplierphoneString = mSupplierphoneEditText.getText().toString().trim();
 
 
-        // Check if this is supposed to be a new inventory item
-        // and check if all the fields in the editor are blank
-        if (mCurrentInventoryUri == null && TextUtils.isEmpty(nameString)) {
-            // Since name field was not added, we can return early without creating a new item.
+        // Check if this is supposed to be a NEW inventory item
+        // and ALL fields in the editor are NULL for a new record
+        if (mCurrentInventoryUri == null && (TextUtils.isEmpty(nameString) &&
+                TextUtils.isEmpty(priceString) &&
+                TextUtils.isEmpty(quantityString) &&
+                TextUtils.isEmpty(suppliernameString) &&
+                TextUtils.isEmpty(supplierphoneString) )) {
+            // No data added to any new field so
             // No need to create ContentValues and no need to do any ContentProvider operations.
-            Toast.makeText(this, getString(R.string.name_save_failed),
+            Toast.makeText(this, getString(R.string.nochanges_save_failed),
                     Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (mCurrentInventoryUri == null && nameString.length() > 20) {
-            // Since name field greater than 20 character, we can return early without creating a new item.
+        //Check if this is supposed to be a NEW inventory item
+        // AND any field is NULL - do not save
+        if (mCurrentInventoryUri == null && (TextUtils.isEmpty(nameString) ||
+                TextUtils.isEmpty(priceString) ||
+                TextUtils.isEmpty(quantityString) ||
+                TextUtils.isEmpty(suppliernameString) ||
+                TextUtils.isEmpty(supplierphoneString))) {
             // No need to create ContentValues and no need to do any ContentProvider operations.
-            Toast.makeText(this, getString(R.string.name_save_failed),
+            Toast.makeText(this, getString(R.string.null_save_failed),
                     Toast.LENGTH_SHORT).show();
+
+            getApplicationContext();
+            Intent i = new Intent(getApplicationContext(), EditorActivity.class);
+            startActivity(i);
             return;
         }
 
 
-        //Validation for existing Inventory item and empty name which must have value
-        if (mCurrentInventoryUri != null && TextUtils.isEmpty(nameString)) {
-            // Since name is empty prompt toast
-            Toast.makeText(this, getString(R.string.name_save_failed),
+        //Validation for existing Inventory item and values must be not null
+        if (mCurrentInventoryUri != null && (TextUtils.isEmpty(nameString)||
+                TextUtils.isEmpty(priceString) ||
+                TextUtils.isEmpty(quantityString) ||
+                TextUtils.isEmpty(suppliernameString) ||
+                TextUtils.isEmpty(supplierphoneString))) {
+            // Since value(s) are null prompt toast
+            Toast.makeText(this, getString(R.string.editnull_save_failed),
                     Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        //Validate name entry for existing item - not null, any character 1-20
-        if (mCurrentInventoryUri != null && nameString.length() > 20) {
-            Toast.makeText(this, getString(R.string.name_save_failed),
-                    Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(getIntent());
             return;
         }
 
@@ -345,14 +358,6 @@ public class EditorActivity extends AppCompatActivity implements
             quantityString = Integer.toString(quantityZero);
         }
 
-
-        //Validate supplier name entry - any character 1-20
-        if (suppliernameString.length() > 20) {
-            Toast.makeText(this, getString(R.string.suppliername_save_failed),
-                    Toast.LENGTH_SHORT).show();
-            finish();
-            startActivity(getIntent());
-        }
 
         //Validate phone entry can be null but if not empty must have 11 numbers
         if (!TextUtils.isEmpty(supplierphoneString) && (supplierphoneString.length() != 11)) {
